@@ -5,7 +5,7 @@
   <br>
   
   [![Release](https://img.shields.io/badge/RELEASE-v2026.1.30-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Aeonsage/releases)
-  [![Core](https://img.shields.io/badge/CORE-OpenSage-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Opensage)
+  [![Core](https://img.shields.io/badge/CORE-Aeonsage_OSS-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Aeonsage)
   [![License](https://img.shields.io/badge/LICENSE-Non--Commercial-000000?style=for-the-badge&logo=gitbook&logoColor=white)](./LICENSE)
   [![Docs](https://img.shields.io/badge/DOCS-官方文档-000000?style=for-the-badge&logo=readme&logoColor=white)](https://docs.aeonsage.org)
 
@@ -35,8 +35,8 @@ AeonSage 采用严格的 **内核环 (Kernel-Ring) 架构**，强制实现认知
 
 ### 2.1 主权转换 (Sovereign Transformation)
 <p align="center">
-  <a href="https://github.com/velonone/Opensage">
-    <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="OpenSage Core" width="400">
+  <a href="https://github.com/velonone/Aeonsage">
+    <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="Aeonsage Core" width="400">
   </a>
 </p>
 AeonSage 作为一个**确定性运行时 (Deterministic Runtime)**，将原始大模型的无序熵转化为有序的主权智能。
@@ -165,8 +165,8 @@ aeonsage start
       <br><b>身份层</b><br>(VDID Network)
     </td>
     <td align="center" width="33%">
-      <a href="https://github.com/velonone/Opensage"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="OpenSage" width="160"></a><br>
-      <br><b>认知内核</b><br>(OpenSage Core)
+      <a href="https://github.com/velonone/Aeonsage"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="Aeonsage OSS" width="160"></a><br>
+      <br><b>认知内核</b><br>(Aeonsage Core)
     </td>
     <td align="center" width="33%">
       <a href="https://velonlabs.com"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/velonlabs-logo.png" alt="VelonLabs" width="120"></a><br>

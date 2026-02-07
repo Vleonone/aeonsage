@@ -5,7 +5,7 @@
   <br>
   
   [![Release](https://img.shields.io/badge/RELEASE-v2026.1.30-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Aeonsage/releases)
-  [![Core](https://img.shields.io/badge/CORE-OpenSage-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Opensage)
+  [![Core](https://img.shields.io/badge/CORE-Aeonsage_OSS-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Aeonsage)
   [![License](https://img.shields.io/badge/LICENSE-Non--Commercial-000000?style=for-the-badge&logo=gitbook&logoColor=white)](./LICENSE)
   [![Docs](https://img.shields.io/badge/DOCS-Official_Wiki-000000?style=for-the-badge&logo=readme&logoColor=white)](https://docs.aeonsage.org)
   [![Language](https://img.shields.io/badge/LANG-中文文档-000000?style=for-the-badge&logo=google-translate&logoColor=white)](./README_ZH.md)
@@ -26,7 +26,7 @@
 ### 1. The Sovereign Kernel (Ring 0)
 The absolute core of the system.
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="OpenSage Kernel" width="400">
+  <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="Aeonsage Cognitive Kernel" width="400">
 </p>
 
 *   **Determinsitic State Machine**: Manages the agent's lifecycle, memory context, and permission boundaries.
@@ -45,14 +45,14 @@ This is not a chatbot. It is a **Deterministic Runtime Environment** for verifie
 AeonSage implements a strict **Kernel-Ring Architecture**, enforcing separation between the cognitive core and external I/O.
 
 ### 2.1 The Sovereign Transformation
-AeonSage acts as a **Deterministic Runtime** that stabilizes the entropy of raw LLMs via the **OpenSage Kernel**.
+AeonSage acts as a **Deterministic Runtime** that stabilizes the entropy of raw LLMs via the **Aeonsage Cognitive Kernel**.
 
 <p align="center">
-  <a href="https://github.com/velonone/Opensage">
-    <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="OpenSage Core" width="300">
+  <a href="https://github.com/velonone/Aeonsage">
+    <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="Aeonsage Core" width="300">
   </a>
   <br>
-  [![Core](https://img.shields.io/badge/KERNEL-OpenSage_v1.0-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Opensage)
+  [![Core](https://img.shields.io/badge/KERNEL-Aeonsage_OSS_v1.0-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Aeonsage)
 </p>
 
 ```mermaid
@@ -205,8 +205,8 @@ Collaborating to build the Sovereign Web.
       <br><b>Identity Layer</b><br>(VDID Network)
     </td>
     <td align="center" width="33%">
-      <a href="https://github.com/velonone/Opensage"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="OpenSage" width="160"></a><br>
-      <br><b>Cognitive Kernel</b><br>(OpenSage Core)
+      <a href="https://github.com/velonone/Aeonsage"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="Aeonsage OSS" width="160"></a><br>
+      <br><b>Cognitive Kernel</b><br>(Aeonsage Core)
     </td>
     <td align="center" width="33%">
       <a href="https://velonlabs.com"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/velonlabs-logo.png" alt="VelonLabs" width="120"></a><br>
