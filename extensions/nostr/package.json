@@ -1,0 +1,31 @@
+{
+  "name": "@aeonsage/nostr",
+  "version": "2026.1.26",
+  "type": "module",
+  "description": "AeonSage Nostr channel plugin for NIP-04 encrypted DMs",
+  "aeonsage": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "channel": {
+      "id": "nostr",
+      "label": "Nostr",
+      "selectionLabel": "Nostr (NIP-04 DMs)",
+      "docsPath": "/channels/nostr",
+      "docsLabel": "nostr",
+      "blurb": "Decentralized protocol; encrypted DMs via NIP-04.",
+      "order": 55,
+      "quickstartAllowFrom": true
+    },
+    "install": {
+      "npmSpec": "@aeonsage/nostr",
+      "localPath": "extensions/nostr",
+      "defaultChoice": "npm"
+    }
+  },
+  "dependencies": {
+    "aeonsage": "workspace:*",
+    "nostr-tools": "^2.20.0",
+    "zod": "^4.3.6"
+  }
+}

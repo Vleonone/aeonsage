@@ -1,0 +1,117 @@
+/**
+ * AeonSage Dashboard Background Effects
+ * 
+ * Provides:
+ * - Gradient backgrounds for Light/Dark themes
+ * - Animated 3D geometric shapes (CSS-only, performant)
+ * - Floating orb animations
+ */
+
+/* ========== Dashboard Container with Gradient ========== */
+.dashboard-bg {
+    position: relative;
+    min-height: 100%;
+    /* SENSEI: Allow content to flow and scroll - removed overflow:hidden */
+}
+
+/* Dark Theme: Annual Ring Texture (Irregular & Lightweight) */
+.dashboard-bg::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: #0A0A0A;
+    background-image:
+        repeating-radial-gradient(circle at 20% 30%, transparent 0, transparent 40px, rgba(255, 255, 255, 0.015) 41px, transparent 42px),
+        repeating-radial-gradient(circle at 80% 70%, transparent 0, transparent 60px, rgba(255, 255, 255, 0.01) 61px, transparent 62px),
+        repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 100px, rgba(255, 255, 255, 0.008) 101px, transparent 102px);
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* Light Theme: Subtle Paper Grain */
+:root[data-theme="light"] .dashboard-bg::before {
+    background: #FDFDFD;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
+    background-size: 24px 24px;
+}
+
+/* ========== 3D Geometric Shapes (CSS Only) - Disabled for Minimalist Audit ========== */
+.dashboard-shapes {
+    display: none;
+}
+
+/* Core Green Sphere - Bottom Right */
+.shape-sphere-accent {
+    position: absolute;
+    bottom: -10%;
+    right: -5%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 30% 30%,
+            rgba(0, 161, 0, 0.4) 0%,
+            rgba(0, 161, 0, 0.1) 50%,
+            transparent 100%);
+    filter: blur(60px);
+}
+
+/* Battle Orange Sphere - Top Left (Secondary Brand Motif) */
+.shape-sphere-secondary {
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 70% 70%,
+            rgba(255, 69, 0, 0.2) 0%,
+            rgba(255, 69, 0, 0.05) 50%,
+            transparent 100%);
+    filter: blur(40px);
+}
+
+/* Light Theme: Adjusted Brand Accents */
+:root[data-theme="light"] .shape-sphere-accent {
+    background:
+        radial-gradient(circle at 30% 30%,
+            rgba(0, 161, 0, 0.15) 0%,
+            rgba(0, 161, 0, 0.05) 60%,
+            transparent 100%);
+}
+
+:root[data-theme="light"] .shape-sphere-secondary {
+    background:
+        radial-gradient(circle at 70% 70%,
+            rgba(255, 69, 0, 0.1) 0%,
+            rgba(255, 69, 0, 0.02) 60%,
+            transparent 100%);
+}
+
+/* Small Decorative Orbs - Hidden */
+.shape-orb-small {
+    display: none;
+}
+
+/* ========== High-Fidelity Silk Mesh Background (Static) - Simplified to Base Color ========== */
+.silk-mesh-bg {
+    background: var(--bg);
+}
+
+:root[data-theme="light"] .silk-mesh-bg {
+    background: var(--bg-silk);
+}
+
+/* ========== Utility Classes ========== */
+.bg-gradient-dashboard {
+    background: var(--bg);
+}
+
+:root[data-theme="light"] .bg-gradient-dashboard {
+    background: var(--bg-silk);
+}
+
+.has-shapes {
+    position: relative;
+}

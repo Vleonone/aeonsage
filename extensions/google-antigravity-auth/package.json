@@ -1,0 +1,11 @@
+{
+  "name": "@aeonsage/google-antigravity-auth",
+  "version": "2026.1.26",
+  "type": "module",
+  "description": "AeonSage Google Antigravity OAuth provider plugin",
+  "aeonsage": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

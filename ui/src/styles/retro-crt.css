@@ -1,0 +1,348 @@
+/* ========================================
+   RETRO CRT 复古显示器风格系统
+   适用于侧边栏游戏彩蛋 & 终端模拟
+   ======================================== */
+
+/* CRT 屏幕容器 */
+.crt-screen {
+  position: relative;
+  background: linear-gradient(135deg, #666 0%, #888 50%, #666 100%);
+  border-radius: 32px;
+  padding: 32px;
+  box-shadow: 
+    0 0 80px rgba(0, 0, 0, 0.8),
+    inset 0 0 20px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* CRT 显示区域 */
+.crt-display {
+  position: relative;
+  background: #000;
+  border: 8px solid #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 
+    inset 0 0 60px rgba(0, 100, 255, 0.1),
+    0 0 20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* CRT 扫描线效果 */
+.crt-display::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 10;
+  animation: scanline 8s linear infinite;
+}
+
+/* CRT 屏幕闪烁 */
+.crt-display::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.27861; }
+  5% { opacity: 0.34769; }
+  10% { opacity: 0.23604; }
+  15% { opacity: 0.90626; }
+  20% { opacity: 0.18128; }
+  25% { opacity: 0.83891; }
+  30% { opacity: 0.65583; }
+  35% { opacity: 0.67807; }
+  40% { opacity: 0.26559; }
+  45% { opacity: 0.84693; }
+  50% { opacity: 0.96019; }
+  55% { opacity: 0.08594; }
+  60% { opacity: 0.20313; }
+  65% { opacity: 0.71988; }
+  70% { opacity: 0.53455; }
+  75% { opacity: 0.37288; }
+  80% { opacity: 0.71428; }
+  85% { opacity: 0.70419; }
+  90% { opacity: 0.7003; }
+  95% { opacity: 0.36108; }
+  100% { opacity: 0.24387; }
+}
+
+/* 霓虹文字 - 青色/黄色渐变 */
+.crt-neon-text {
+  font-family: var(--font-pixel);
+  font-size: 32px;
+  text-align: center;
+  background: linear-gradient(90deg, #00ffff 0%, #ffff00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 
+    0 0 10px rgba(0, 255, 255, 0.8),
+    0 0 20px rgba(0, 255, 255, 0.6),
+    0 0 30px rgba(255, 255, 0, 0.4);
+  animation: neon-pulse 1.5s ease-in-out infinite alternate;
+  letter-spacing: 0.1em;
+  padding: 20px 0;
+}
+
+@keyframes neon-pulse {
+  from {
+    text-shadow: 
+      0 0 10px rgba(0, 255, 255, 0.8),
+      0 0 20px rgba(0, 255, 255, 0.6),
+      0 0 30px rgba(255, 255, 0, 0.4);
+  }
+  to {
+    text-shadow: 
+      0 0 20px rgba(0, 255, 255, 1),
+      0 0 30px rgba(0, 255, 255, 0.8),
+      0 0 40px rgba(255, 255, 0, 0.6),
+      0 0 50px rgba(255, 255, 0, 0.4);
+  }
+}
+
+/* 像素字体子标题 */
+.crt-subtitle {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  color: #ffcc00;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
+  letter-spacing: 0.15em;
+  margin: 10px 0;
+}
+
+/* CRT 按钮 */
+.crt-button {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  color: #fff;
+  background: #333;
+  border: 3px solid #666;
+  padding: 12px 24px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #222;
+  letter-spacing: 0.1em;
+}
+
+.crt-button:hover {
+  background: #444;
+  border-color: #888;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #222;
+}
+
+.crt-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #222;
+}
+
+/* CRT 顶部信息栏 */
+.crt-info-bar {
+  background: #3a3a3a;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  color: #ffff00;
+  text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+  border-bottom: 2px solid #222;
+  letter-spacing: 0.1em;
+}
+
+/* CRT 底部控制区 */
+.crt-controls {
+  background: #2a2a2a;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  border-top: 2px solid #444;
+}
+
+.crt-button-row {
+  display: flex;
+  gap: 12px;
+}
+
+/* 方向键盘 */
+.crt-dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(3, 60px);
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.crt-dpad-btn {
+  background: linear-gradient(135deg, #555 0%, #333 100%);
+  border: 3px solid #666;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 
+    inset 0 2px 0 rgba(255, 255, 255, 0.2),
+    0 4px 0 #222;
+}
+
+.crt-dpad-btn:hover {
+  background: linear-gradient(135deg, #666 0%, #444 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    0 6px 0 #222;
+}
+
+.crt-dpad-btn:active {
+  transform: translateY(2px);
+  box-shadow: 
+    inset 0 2px 0 rgba(255, 255, 255, 0.1),
+    0 2px 0 #222;
+}
+
+.crt-dpad-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: #ffcc00;
+  filter: drop-shadow(0 0 4px rgba(255, 204, 0, 0.5));
+}
+
+.crt-dpad-btn:nth-child(2) { grid-column: 2; grid-row: 1; }
+.crt-dpad-btn:nth-child(3) { grid-column: 1; grid-row: 2; }
+.crt-dpad-btn:nth-child(4) { grid-column: 2; grid-row: 2; }
+.crt-dpad-btn:nth-child(5) { grid-column: 3; grid-row: 2; }
+
+/* 屏幕抖动动画 */
+.shake {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* 游戏网格容器 */
+.crt-game-grid {
+  display: grid;
+  gap: 0;
+  padding: 40px;
+  background: #000;
+  min-height: 400px;
+  place-content: center;
+}
+
+/* 游戏格子元素 */
+.crt-tile {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.crt-tile.wall {
+  background: linear-gradient(135deg, #0066ff 0%, #0033aa 100%);
+  border: 2px solid #0088ff;
+  box-shadow: 
+    inset 0 0 10px rgba(0, 136, 255, 0.5),
+    0 0 5px rgba(0, 102, 255, 0.3);
+}
+
+.crt-tile.floor {
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.crt-tile.target {
+  background: radial-gradient(circle, rgba(0, 255, 0, 0.3) 0%, transparent 70%);
+  border: 2px dashed rgba(0, 255, 0, 0.5);
+}
+
+.crt-tile.box {
+  background: linear-gradient(135deg, #cc8800 0%, #aa6600 100%);
+  border: 3px solid #ffaa00;
+  box-shadow: 
+    inset 0 0 8px rgba(255, 170, 0, 0.6),
+    0 0 10px rgba(204, 136, 0, 0.4);
+}
+
+.crt-tile.box.on-target {
+  border-color: #00ff00;
+  box-shadow: 
+    inset 0 0 8px rgba(0, 255, 0, 0.8),
+    0 0 15px rgba(0, 255, 0, 0.6);
+  animation: target-pulse 1s ease-in-out infinite;
+}
+
+@keyframes target-pulse {
+  0%, 100% { box-shadow: inset 0 0 8px rgba(0, 255, 0, 0.8), 0 0 15px rgba(0, 255, 0, 0.6); }
+  50% { box-shadow: inset 0 0 12px rgba(0, 255, 0, 1), 0 0 20px rgba(0, 255, 0, 0.8); }
+}
+
+.crt-tile.player {
+  background: radial-gradient(circle, #00ffaa 30%, #00cc88 100%);
+  border: 3px solid #00ffcc;
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 0 8px rgba(0, 255, 204, 0.8),
+    0 0 15px rgba(0, 255, 170, 0.6);
+  animation: player-glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes player-glow {
+  from {
+    box-shadow: 
+      inset 0 0 8px rgba(0, 255, 204, 0.8),
+      0 0 15px rgba(0, 255, 170, 0.6);
+  }
+  to {
+    box-shadow: 
+      inset 0 0 12px rgba(0, 255, 204, 1),
+      0 0 20px rgba(0, 255, 170, 0.8),
+      0 0 30px rgba(0, 255, 170, 0.4);
+  }
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+  .crt-screen { padding: 20px; border-radius: 24px; }
+  .crt-neon-text { font-size: 24px; }
+  .crt-subtitle { font-size: 10px; }
+  .crt-button { font-size: 10px; padding: 10px 20px; }
+  .crt-dpad { grid-template-columns: repeat(3, 50px); grid-template-rows: repeat(3, 50px); }
+  .crt-tile { width: 32px; height: 32px; }
+}

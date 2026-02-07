@@ -1,0 +1,25 @@
+{
+  "name": "@aeonsage/mattermost",
+  "version": "2026.1.26",
+  "type": "module",
+  "description": "AeonSage Mattermost channel plugin",
+  "aeonsage": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "channel": {
+      "id": "mattermost",
+      "label": "Mattermost",
+      "selectionLabel": "Mattermost (plugin)",
+      "docsPath": "/channels/mattermost",
+      "docsLabel": "mattermost",
+      "blurb": "self-hosted Slack-style chat; install the plugin to enable.",
+      "order": 65
+    },
+    "install": {
+      "npmSpec": "@aeonsage/mattermost",
+      "localPath": "extensions/mattermost",
+      "defaultChoice": "npm"
+    }
+  }
+}

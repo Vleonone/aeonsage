@@ -1,0 +1,11 @@
+{
+  "name": "@aeonsage/telegram",
+  "version": "2026.1.26",
+  "type": "module",
+  "description": "AeonSage Telegram channel plugin",
+  "aeonsage": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

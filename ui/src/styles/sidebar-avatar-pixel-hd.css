@@ -1,0 +1,508 @@
+/**
+ * 方案 D：高清像素艺术（Pixel Art HD）
+ * 手绘多层像素 + 抖动渐变 + 金属光泽
+ */
+
+/* ========== HD 像素容器 ========== */
+.pixel-robot-container.style-pixel-hd {
+  background: rgba(18, 20, 26, 0.6);
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: contrast(1.15) saturate(1.25);
+}
+
+/* 像素网格背景 */
+.pixel-robot-container.style-pixel-hd::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(255, 255, 255, 0.01) 3px,
+      rgba(255, 255, 255, 0.01) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(255, 255, 255, 0.01) 3px,
+      rgba(255, 255, 255, 0.01) 4px
+    );
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ========== HD 像素机器人主体 ========== */
+.pixel-robot.style-pixel-hd {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6));
+  animation: pixel-idle 4s ease-in-out infinite;
+}
+
+@keyframes pixel-idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ========== HD 像素头部（手绘 box-shadow） ========== */
+.robot-head.style-pixel-hd {
+  width: 72px;
+  height: 72px;
+  background: transparent;
+  position: relative;
+  animation: none;
+}
+
+/* 使用 box-shadow 手绘高清像素头部 */
+.robot-head.style-pixel-hd::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  top: 0;
+  left: 0;
+  background: transparent;
+  box-shadow:
+    /* 第1行 - 顶部边缘 */
+    16px 0 0 0 #A03000,
+    20px 0 0 0 #C03800,
+    24px 0 0 0 #E04000,
+    28px 0 0 0 #FF4500,
+    32px 0 0 0 #FF4500,
+    36px 0 0 0 #FF4500,
+    40px 0 0 0 #FF4500,
+    44px 0 0 0 #E04000,
+    48px 0 0 0 #C03800,
+    52px 0 0 0 #A03000,
+    
+    /* 第2行 - 高光层开始 */
+    12px 4px 0 0 #C03800,
+    16px 4px 0 0 #FF5522,
+    20px 4px 0 0 #FF6644,
+    24px 4px 0 0 #FF7755,
+    28px 4px 0 0 #FF8866,
+    32px 4px 0 0 #FF8866,
+    36px 4px 0 0 #FF8866,
+    40px 4px 0 0 #FF7755,
+    44px 4px 0 0 #FF6644,
+    48px 4px 0 0 #FF5522,
+    52px 4px 0 0 #E04000,
+    56px 4px 0 0 #C03800,
+    
+    /* 第3行 - 顶部主体 */
+    8px 8px 0 0 #E04000,
+    12px 8px 0 0 #FF5522,
+    16px 8px 0 0 #FF6644,
+    20px 8px 0 0 #FF7755,
+    24px 8px 0 0 #FF8866,
+    28px 8px 0 0 #FF9977,
+    32px 8px 0 0 #FF9977,
+    36px 8px 0 0 #FF9977,
+    40px 8px 0 0 #FF8866,
+    44px 8px 0 0 #FF7755,
+    48px 8px 0 0 #FF6644,
+    52px 8px 0 0 #FF5522,
+    56px 8px 0 0 #FF4500,
+    60px 8px 0 0 #E04000,
+    
+    /* 第4行 - 眼睛行上方 */
+    8px 12px 0 0 #FF4500,
+    12px 12px 0 0 #FF5522,
+    16px 12px 0 0 #FF6644,
+    20px 12px 0 0 #FF7755,
+    24px 12px 0 0 #FF8866,
+    28px 12px 0 0 #FF9977,
+    32px 12px 0 0 #FFAA88,
+    36px 12px 0 0 #FFAA88,
+    40px 12px 0 0 #FF9977,
+    44px 12px 0 0 #FF8866,
+    48px 12px 0 0 #FF7755,
+    52px 12px 0 0 #FF6644,
+    56px 12px 0 0 #FF5522,
+    60px 12px 0 0 #FF4500,
+    
+    /* 第5行 - 眼睛行 */
+    8px 16px 0 0 #FF4500,
+    12px 16px 0 0 #FF5522,
+    16px 16px 0 0 #FFF, /* 左眼外圈 */
+    20px 16px 0 0 #FFF,
+    24px 16px 0 0 #FF7755,
+    28px 16px 0 0 #FF8866,
+    32px 16px 0 0 #FF9977,
+    36px 16px 0 0 #FF9977,
+    40px 16px 0 0 #FF8866,
+    44px 16px 0 0 #FF7755,
+    48px 16px 0 0 #FFF, /* 右眼外圈 */
+    52px 16px 0 0 #FFF,
+    56px 16px 0 0 #FF5522,
+    60px 16px 0 0 #FF4500,
+    
+    /* 第6行 - 眼睛行 */
+    8px 20px 0 0 #FF4500,
+    12px 20px 0 0 #FF5522,
+    16px 20px 0 0 #FFF, /* 左眼外圈 */
+    20px 20px 0 0 #FFF,
+    24px 20px 0 0 #FF7755,
+    28px 20px 0 0 #FF8866,
+    32px 20px 0 0 #FF9977,
+    36px 20px 0 0 #FF9977,
+    40px 20px 0 0 #FF8866,
+    44px 20px 0 0 #FF7755,
+    48px 20px 0 0 #FFF, /* 右眼外圈 */
+    52px 20px 0 0 #FFF,
+    56px 20px 0 0 #FF5522,
+    60px 20px 0 0 #FF4500,
+    
+    /* 第7行 - 眼睛下方 */
+    8px 24px 0 0 #FF4500,
+    12px 24px 0 0 #FF5522,
+    16px 24px 0 0 #FF6644,
+    20px 24px 0 0 #FF7755,
+    24px 24px 0 0 #FF8866,
+    28px 24px 0 0 #FF9977,
+    32px 24px 0 0 #FFAA88,
+    36px 24px 0 0 #FFAA88,
+    40px 24px 0 0 #FF9977,
+    44px 24px 0 0 #FF8866,
+    48px 24px 0 0 #FF7755,
+    52px 24px 0 0 #FF6644,
+    56px 24px 0 0 #FF5522,
+    60px 24px 0 0 #FF4500,
+    
+    /* 第8行 - 中部 */
+    8px 28px 0 0 #FF4500,
+    12px 28px 0 0 #FF5522,
+    16px 28px 0 0 #FF6644,
+    20px 28px 0 0 #FF7755,
+    24px 28px 0 0 #FF8866,
+    28px 28px 0 0 #FF9977,
+    32px 28px 0 0 #FF9977,
+    36px 28px 0 0 #FF9977,
+    40px 28px 0 0 #FF8866,
+    44px 28px 0 0 #FF7755,
+    48px 28px 0 0 #FF6644,
+    52px 28px 0 0 #FF5522,
+    56px 28px 0 0 #FF4500,
+    60px 28px 0 0 #E04000,
+    
+    /* 第9-11行 - 中下部（渐变到阴影） */
+    8px 32px 0 0 #FF4500,
+    12px 32px 0 0 #FF5522,
+    16px 32px 0 0 #FF6644,
+    20px 32px 0 0 #FF7755,
+    24px 32px 0 0 #FF8866,
+    28px 32px 0 0 #FF8866,
+    32px 32px 0 0 #FF8866,
+    36px 32px 0 0 #FF8866,
+    40px 32px 0 0 #FF7755,
+    44px 32px 0 0 #FF6644,
+    48px 32px 0 0 #FF5522,
+    52px 32px 0 0 #FF4500,
+    56px 32px 0 0 #E04000,
+    60px 32px 0 0 #C03800,
+    
+    8px 36px 0 0 #E04000,
+    12px 36px 0 0 #FF4500,
+    16px 36px 0 0 #FF5522,
+    20px 36px 0 0 #FF6644,
+    24px 36px 0 0 #FF7755,
+    28px 36px 0 0 #FF7755,
+    32px 36px 0 0 #FF7755,
+    36px 36px 0 0 #FF7755,
+    40px 36px 0 0 #FF6644,
+    44px 36px 0 0 #FF5522,
+    48px 36px 0 0 #FF4500,
+    52px 36px 0 0 #E04000,
+    56px 36px 0 0 #C03800,
+    60px 36px 0 0 #A03000,
+    
+    /* 第12行 - 下部 */
+    12px 40px 0 0 #E04000,
+    16px 40px 0 0 #FF4500,
+    20px 40px 0 0 #FF5522,
+    24px 40px 0 0 #FF6644,
+    28px 40px 0 0 #FF6644,
+    32px 40px 0 0 #FF6644,
+    36px 40px 0 0 #FF6644,
+    40px 40px 0 0 #FF5522,
+    44px 40px 0 0 #FF4500,
+    48px 40px 0 0 #E04000,
+    52px 40px 0 0 #C03800,
+    56px 40px 0 0 #A03000,
+    
+    /* 第13行 - 底部阴影 */
+    16px 44px 0 0 #C03800,
+    20px 44px 0 0 #E04000,
+    24px 44px 0 0 #FF4500,
+    28px 44px 0 0 #FF4500,
+    32px 44px 0 0 #FF4500,
+    36px 44px 0 0 #FF4500,
+    40px 44px 0 0 #E04000,
+    44px 44px 0 0 #C03800,
+    48px 44px 0 0 #A03000,
+    
+    /* 第14行 - 底部边缘 */
+    20px 48px 0 0 #A03000,
+    24px 48px 0 0 #C03800,
+    28px 48px 0 0 #E04000,
+    32px 48px 0 0 #E04000,
+    36px 48px 0 0 #E04000,
+    40px 48px 0 0 #C03800,
+    44px 48px 0 0 #A03000;
+}
+
+/* 眼睛发光动画 */
+.robot-head.style-pixel-hd::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  top: 16px;
+  left: 16px;
+  background: transparent;
+  box-shadow:
+    0 0 0 0 rgba(255, 255, 255, 0.9),
+    4px 0 0 0 rgba(255, 255, 255, 0.9),
+    0 4px 0 0 rgba(255, 255, 255, 0.8),
+    4px 4px 0 0 rgba(255, 255, 255, 0.8),
+    32px 0 0 0 rgba(255, 255, 255, 0.9),
+    36px 0 0 0 rgba(255, 255, 255, 0.9),
+    32px 4px 0 0 rgba(255, 255, 255, 0.8),
+    36px 4px 0 0 rgba(255, 255, 255, 0.8);
+  animation: pixel-eye-glow 2s ease-in-out infinite;
+}
+
+@keyframes pixel-eye-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px var(--accent-glow));
+    box-shadow:
+      0 0 0 0 var(--accent),
+      4px 0 0 0 var(--accent),
+      0 4px 0 0 var(--accent),
+      4px 4px 0 0 var(--accent),
+      32px 0 0 0 var(--accent),
+      36px 0 0 0 var(--accent),
+      32px 4px 0 0 var(--accent),
+      36px 4px 0 0 var(--accent);
+  }
+}
+
+/* ========== HD 像素核心 ========== */
+.robot-core.style-pixel-hd {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  position: relative;
+  top: -16px;
+  animation: pixel-core-pulse 2s ease-in-out infinite;
+}
+
+/* 使用 box-shadow 手绘核心 */
+.robot-core.style-pixel-hd::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  top: 0;
+  left: 0;
+  background: transparent;
+  box-shadow:
+    /* 外层光晕 */
+    0 0 0 0 rgba(255, 69, 0, 0.3),
+    4px 0 0 0 rgba(255, 69, 0, 0.4),
+    8px 0 0 0 rgba(255, 69, 0, 0.5),
+    12px 0 0 0 rgba(255, 69, 0, 0.6),
+    16px 0 0 0 rgba(255, 69, 0, 0.6),
+    20px 0 0 0 rgba(255, 69, 0, 0.5),
+    24px 0 0 0 rgba(255, 69, 0, 0.4),
+    28px 0 0 0 rgba(255, 69, 0, 0.3),
+    
+    /* 第2层 */
+    4px 4px 0 0 rgba(255, 85, 34, 0.5),
+    8px 4px 0 0 #FF5522,
+    12px 4px 0 0 #FF6644,
+    16px 4px 0 0 #FF6644,
+    20px 4px 0 0 #FF5522,
+    24px 4px 0 0 rgba(255, 85, 34, 0.5),
+    
+    /* 第3层 - 高光开始 */
+    8px 8px 0 0 #FF6644,
+    12px 8px 0 0 #FF8866,
+    16px 8px 0 0 #FFAA88,
+    20px 8px 0 0 #FF8866,
+    24px 8px 0 0 #FF6644,
+    
+    /* 第4层 - 核心 */
+    12px 12px 0 0 #FFBB99,
+    16px 12px 0 0 #FFF,
+    20px 12px 0 0 #FFBB99,
+    
+    /* 第5层 - 核心中心 */
+    12px 16px 0 0 #FFBB99,
+    16px 16px 0 0 #FFF,
+    20px 16px 0 0 #FFBB99,
+    
+    /* 第6-8层 - 下半部分（镜像上半部） */
+    8px 20px 0 0 #FF6644,
+    12px 20px 0 0 #FF8866,
+    16px 20px 0 0 #FFAA88,
+    20px 20px 0 0 #FF8866,
+    24px 20px 0 0 #FF6644,
+    
+    4px 24px 0 0 rgba(255, 85, 34, 0.5),
+    8px 24px 0 0 #FF5522,
+    12px 24px 0 0 #FF6644,
+    16px 24px 0 0 #FF6644,
+    20px 24px 0 0 #FF5522,
+    24px 24px 0 0 rgba(255, 85, 34, 0.5),
+    
+    0 28px 0 0 rgba(255, 69, 0, 0.3),
+    4px 28px 0 0 rgba(255, 69, 0, 0.4),
+    8px 28px 0 0 rgba(255, 69, 0, 0.5),
+    12px 28px 0 0 rgba(255, 69, 0, 0.6),
+    16px 28px 0 0 rgba(255, 69, 0, 0.6),
+    20px 28px 0 0 rgba(255, 69, 0, 0.5),
+    24px 28px 0 0 rgba(255, 69, 0, 0.4),
+    28px 28px 0 0 rgba(255, 69, 0, 0.3);
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+@keyframes pixel-core-pulse {
+  0%, 100% {
+    transform: translateZ(0) scale(1);
+    filter: drop-shadow(0 0 8px var(--accent-glow));
+  }
+  50% {
+    transform: translateZ(0) scale(1.1);
+    filter: drop-shadow(0 0 16px var(--accent-glow));
+  }
+}
+
+/* ========== HD 像素身体（简化版，使用渐变 + 细节点缀） ========== */
+.robot-body.style-pixel-hd {
+  width: 80px;
+  height: 64px;
+  background: linear-gradient(180deg, 
+    #5A5A63 0%,
+    #4A4A52 25%,
+    #3F3F46 50%,
+    #2F2F35 75%,
+    #27272A 100%
+  );
+  border: 2px solid #52525B;
+  border-radius: 4px;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+  position: relative;
+  top: -20px;
+  image-rendering: pixelated;
+}
+
+/* 胸口像素装甲板 */
+.robot-body.style-pixel-hd::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  top: 16px;
+  left: 20px;
+  background: transparent;
+  box-shadow:
+    /* 装甲板线条 */
+    0 0 0 0 #6B6B73,
+    2px 0 0 0 #6B6B73,
+    4px 0 0 0 #6B6B73,
+    6px 0 0 0 #6B6B73,
+    /* 能量指示灯 */
+    16px 12px 0 0 var(--accent),
+    18px 12px 0 0 #FF6644,
+    20px 12px 0 0 var(--accent),
+    /* 更多细节... */
+    8px 20px 0 0 #52525B,
+    10px 20px 0 0 #52525B;
+  animation: armor-glow 3s ease-in-out infinite;
+}
+
+@keyframes armor-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(255, 69, 0, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px var(--accent-glow));
+  }
+}
+
+/* 手臂（像素化圆角矩形） */
+.robot-body.style-pixel-hd::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 56px;
+  background: linear-gradient(180deg, #5A5A63 0%, #3F3F46 50%, #27272A 100%);
+  border: 2px solid #52525B;
+  border-radius: 3px;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  top: 2px;
+  left: -24px;
+  animation: pixel-arm-wave 3s ease-in-out infinite;
+}
+
+@keyframes pixel-arm-wave {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(-18deg); }
+}
+
+/* ========== HD 像素腿部 ========== */
+.robot-legs.style-pixel-hd {
+  width: 80px;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: -20px;
+}
+
+.robot-legs.style-pixel-hd::before,
+.robot-legs.style-pixel-hd::after {
+  content: '';
+  width: 24px;
+  height: 48px;
+  background: linear-gradient(180deg, #5A5A63 0%, #3F3F46 50%, #27272A 100%);
+  border: 2px solid #52525B;
+  border-radius: 3px;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+  image-rendering: pixelated;
+}
+
+.robot-legs.style-pixel-hd::before {
+  margin-right: 8px;
+}
+
+/* ========== 响应式 ========== */
+@media (max-width: 768px) {
+  .robot-head.style-pixel-hd {
+    transform: scale(0.85);
+  }
+  
+  .robot-body.style-pixel-hd {
+    width: 68px;
+    height: 54px;
+  }
+}

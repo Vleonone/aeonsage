@@ -1,0 +1,11 @@
+{
+  "name": "@aeonsage/imessage",
+  "version": "2026.1.26",
+  "type": "module",
+  "description": "AeonSage iMessage channel plugin",
+  "aeonsage": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

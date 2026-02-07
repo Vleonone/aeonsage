@@ -1,0 +1,449 @@
+/**
+ * 方案 C：3D 等轴视角 + 全息投影混合
+ * 立体机器人 + 赛博朋克全息效果 + 扫描线动画
+ */
+
+/* ========== 3D 容器配置 ========== */
+.pixel-robot-container.style-3d-holo {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  background: rgba(18, 20, 26, 0.4);
+  position: relative;
+  overflow: visible;
+}
+
+/* 全息扫描线背景 */
+.pixel-robot-container.style-3d-holo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(255, 69, 0, 0.03) 2px,
+    rgba(255, 69, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 扫描线动画 */
+.pixel-robot-container.style-3d-holo::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 69, 0, 0.6) 20%,
+    rgba(255, 69, 0, 1) 50%,
+    rgba(255, 69, 0, 0.6) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px var(--accent-glow);
+  animation: holo-scan 3s ease-in-out infinite;
+  z-index: 3;
+}
+
+@keyframes holo-scan {
+  0% { top: 0; opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { top: 100%; opacity: 0.8; }
+}
+
+/* ========== 3D 机器人主体 ========== */
+.pixel-robot.style-3d-holo {
+  transform-style: preserve-3d;
+  transform: rotateX(15deg) rotateY(-10deg);
+  transition: transform 0.6s var(--ease-smooth);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+  position: relative;
+  z-index: 2;
+}
+
+.pixel-robot.style-3d-holo:hover {
+  transform: rotateX(20deg) rotateY(-15deg) scale(1.05);
+}
+
+/* ========== 3D 头部（等轴视角 + 全息材质） ========== */
+.robot-head.style-3d-holo {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, 
+    rgba(255, 69, 0, 0.9) 0%,
+    rgba(255, 106, 51, 0.95) 50%,
+    rgba(255, 69, 0, 0.9) 100%
+  );
+  border: 2px solid rgba(255, 69, 0, 0.6);
+  box-shadow: 
+    /* 3D 深度阴影 */
+    0 8px 16px rgba(0, 0, 0, 0.5),
+    0 12px 24px rgba(0, 0, 0, 0.3),
+    /* 内部阴影 */
+    inset 0 -8px 16px rgba(0, 0, 0, 0.4),
+    inset 0 8px 16px rgba(255, 255, 255, 0.3),
+    /* 全息光晕 */
+    0 0 30px var(--accent-glow),
+    0 0 50px rgba(255, 69, 0, 0.4),
+    /* 边缘高光 */
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  position: relative;
+  transform: translateZ(30px);
+  animation: head-float-3d 4s ease-in-out infinite;
+  backdrop-filter: blur(5px);
+}
+
+@keyframes head-float-3d {
+  0%, 100% { 
+    transform: translateZ(30px) translateY(0) rotateY(0deg);
+  }
+  25% { 
+    transform: translateZ(35px) translateY(-6px) rotateY(-5deg);
+  }
+  50% { 
+    transform: translateZ(40px) translateY(-10px) rotateY(0deg);
+  }
+  75% { 
+    transform: translateZ(35px) translateY(-6px) rotateY(5deg);
+  }
+}
+
+/* 全息故障效果 */
+.robot-head.style-3d-holo.glitch {
+  animation: head-float-3d 4s ease-in-out infinite, holo-glitch 0.3s ease-in-out;
+}
+
+@keyframes holo-glitch {
+  0%, 100% { 
+    transform: translateZ(30px) translateY(0);
+    opacity: 1;
+  }
+  20% { 
+    transform: translateZ(30px) translateY(0) translateX(-3px);
+    opacity: 0.8;
+  }
+  40% { 
+    transform: translateZ(30px) translateY(0) translateX(3px);
+    opacity: 0.9;
+  }
+  60% { 
+    transform: translateZ(30px) translateY(0) translateX(-2px);
+    opacity: 0.85;
+  }
+  80% { 
+    transform: translateZ(30px) translateY(0) translateX(2px);
+    opacity: 0.95;
+  }
+}
+
+/* 3D 眼睛（全息光束） */
+.robot-head.style-3d-holo::before,
+.robot-head.style-3d-holo::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle, 
+    #fff 0%,
+    rgba(255, 255, 255, 0.9) 30%,
+    rgba(255, 69, 0, 0.5) 60%,
+    transparent 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
+  box-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 20px var(--accent-glow),
+    inset 0 0 5px rgba(255, 69, 0, 0.6);
+  top: 18px;
+  animation: eye-scan-3d 2.5s ease-in-out infinite;
+  transform: translateZ(5px);
+}
+
+.robot-head.style-3d-holo::before {
+  left: 12px;
+}
+
+.robot-head.style-3d-holo::after {
+  right: 12px;
+}
+
+@keyframes eye-scan-3d {
+  0%, 100% { 
+    background: radial-gradient(circle, #fff 0%, rgba(255, 255, 255, 0.9) 30%, transparent 100%);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+  }
+  50% { 
+    background: radial-gradient(circle, var(--accent) 0%, rgba(255, 69, 0, 0.8) 30%, transparent 100%);
+    box-shadow: 
+      0 0 15px var(--accent-glow),
+      0 0 25px var(--accent-glow);
+  }
+}
+
+/* ========== 3D 核心（全息能量球） ========== */
+.robot-core.style-3d-holo {
+  width: 28px;
+  height: 28px;
+  background: radial-gradient(circle, 
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 106, 51, 0.95) 20%,
+    rgba(255, 69, 0, 0.9) 40%,
+    rgba(255, 69, 0, 0.6) 70%,
+    transparent 100%
+  );
+  border: 2px solid rgba(255, 69, 0, 0.8);
+  border-radius: 50%;
+  box-shadow: 
+    /* 3D 深度 */
+    0 6px 12px rgba(0, 0, 0, 0.5),
+    /* 内发光 */
+    inset 0 0 15px rgba(255, 255, 255, 0.6),
+    inset 0 0 25px var(--accent-glow),
+    /* 外发光 */
+    0 0 20px var(--accent-glow),
+    0 0 40px var(--accent-glow),
+    0 0 60px rgba(255, 69, 0, 0.4);
+  animation: core-pulse-3d 2s ease-in-out infinite;
+  position: relative;
+  top: -14px;
+  transform: translateZ(25px);
+}
+
+/* 能量粒子环绕 */
+.robot-core.style-3d-holo::before {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: -6px;
+  left: -6px;
+  border: 2px solid transparent;
+  border-top-color: rgba(255, 69, 0, 0.6);
+  border-right-color: rgba(255, 69, 0, 0.4);
+  border-radius: 50%;
+  animation: particle-orbit 3s linear infinite;
+  transform: translateZ(5px);
+}
+
+@keyframes particle-orbit {
+  0% { transform: translateZ(5px) rotate(0deg); }
+  100% { transform: translateZ(5px) rotate(360deg); }
+}
+
+@keyframes core-pulse-3d {
+  0%, 100% {
+    transform: translateZ(25px) scale(1);
+    box-shadow: 
+      0 6px 12px rgba(0, 0, 0, 0.5),
+      inset 0 0 15px rgba(255, 255, 255, 0.6),
+      0 0 20px var(--accent-glow),
+      0 0 40px var(--accent-glow);
+  }
+  50% {
+    transform: translateZ(30px) scale(1.15);
+    box-shadow: 
+      0 8px 16px rgba(0, 0, 0, 0.6),
+      inset 0 0 20px rgba(255, 255, 255, 0.8),
+      0 0 30px var(--accent-glow),
+      0 0 60px var(--accent-glow),
+      0 0 80px rgba(255, 69, 0, 0.5);
+  }
+}
+
+/* ========== 3D 身体（机械外壳） ========== */
+.robot-body.style-3d-holo {
+  width: 76px;
+  height: 60px;
+  background: linear-gradient(180deg, 
+    rgba(82, 82, 91, 0.95) 0%,
+    rgba(63, 63, 70, 0.98) 50%,
+    rgba(39, 39, 42, 1) 100%
+  );
+  border: 2px solid rgba(255, 69, 0, 0.4);
+  border-radius: 6px;
+  box-shadow: 
+    /* 3D 深度 */
+    0 8px 16px rgba(0, 0, 0, 0.6),
+    0 12px 24px rgba(0, 0, 0, 0.4),
+    /* 内部细节 */
+    inset 0 4px 8px rgba(255, 255, 255, 0.1),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.4),
+    /* 全息边缘 */
+    0 0 15px rgba(255, 69, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  position: relative;
+  top: -18px;
+  transform: translateZ(15px);
+}
+
+/* 胸口能量槽 */
+.robot-body.style-3d-holo::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateZ(5px);
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(255, 69, 0, 0.6) 20%,
+    var(--accent) 50%,
+    rgba(255, 69, 0, 0.6) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px var(--accent-glow);
+  animation: energy-flow 2s ease-in-out infinite;
+}
+
+@keyframes energy-flow {
+  0%, 100% { 
+    width: 30px;
+    opacity: 0.6;
+  }
+  50% { 
+    width: 40px;
+    opacity: 1;
+  }
+}
+
+/* 3D 手臂 */
+.robot-body.style-3d-holo::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 52px;
+  background: linear-gradient(180deg, 
+    rgba(82, 82, 91, 0.95) 0%,
+    rgba(63, 63, 70, 0.98) 100%
+  );
+  border: 2px solid rgba(255, 69, 0, 0.3);
+  border-radius: 5px;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+    0 0 10px rgba(255, 69, 0, 0.2);
+  top: 2px;
+  left: -22px;
+  transform: translateZ(10px);
+  animation: arm-wave-left-3d 3.5s ease-in-out infinite;
+}
+
+/* 右手臂（使用 clip-path 伪造） */
+.robot-body.style-3d-holo {
+  clip-path: none;
+}
+
+@keyframes arm-wave-left-3d {
+  0%, 100% { 
+    transform: translateZ(10px) rotate(-5deg);
+  }
+  50% { 
+    transform: translateZ(12px) rotate(-20deg);
+  }
+}
+
+/* ========== 3D 腿部 ========== */
+.robot-legs.style-3d-holo {
+  width: 76px;
+  height: 44px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: -18px;
+  transform: translateZ(10px);
+}
+
+.robot-legs.style-3d-holo::before,
+.robot-legs.style-3d-holo::after {
+  content: '';
+  width: 22px;
+  height: 44px;
+  background: linear-gradient(180deg, 
+    rgba(82, 82, 91, 0.95) 0%,
+    rgba(63, 63, 70, 0.98) 50%,
+    rgba(39, 39, 42, 1) 100%
+  );
+  border: 2px solid rgba(255, 69, 0, 0.3);
+  border-radius: 5px;
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+    0 0 10px rgba(255, 69, 0, 0.2);
+  transform: translateZ(5px);
+}
+
+.robot-legs.style-3d-holo::before {
+  margin-right: 10px;
+}
+
+/* ========== 全息数据流粒子 ========== */
+.pixel-robot-container.style-3d-holo .data-particle {
+  position: absolute;
+  width: 2px;
+  height: 6px;
+  background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
+  box-shadow: 0 0 5px var(--accent-glow);
+  opacity: 0.7;
+  animation: particle-fall 3s linear infinite;
+}
+
+.pixel-robot-container.style-3d-holo .data-particle:nth-child(1) {
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.pixel-robot-container.style-3d-holo .data-particle:nth-child(2) {
+  left: 40%;
+  animation-delay: 0.8s;
+}
+
+.pixel-robot-container.style-3d-holo .data-particle:nth-child(3) {
+  left: 60%;
+  animation-delay: 1.6s;
+}
+
+.pixel-robot-container.style-3d-holo .data-particle:nth-child(4) {
+  left: 80%;
+  animation-delay: 2.4s;
+}
+
+@keyframes particle-fall {
+  0% { 
+    top: -10px;
+    opacity: 0;
+  }
+  10% { 
+    opacity: 0.7;
+  }
+  90% { 
+    opacity: 0.7;
+  }
+  100% { 
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* ========== 响应式 ========== */
+@media (max-width: 768px) {
+  .robot-head.style-3d-holo {
+    width: 52px;
+    height: 52px;
+  }
+  
+  .robot-body.style-3d-holo {
+    width: 62px;
+    height: 48px;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@aeonsage/llm-task",
+  "version": "2026.1.26",
+  "type": "module",
+  "description": "AeonSage JSON-only LLM task plugin",
+  "aeonsage": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

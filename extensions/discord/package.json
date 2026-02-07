@@ -1,0 +1,11 @@
+{
+  "name": "@aeonsage/discord",
+  "version": "2026.1.26",
+  "type": "module",
+  "description": "AeonSage Discord channel plugin",
+  "aeonsage": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

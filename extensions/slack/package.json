@@ -1,0 +1,11 @@
+{
+  "name": "@aeonsage/slack",
+  "version": "2026.1.26",
+  "type": "module",
+  "description": "AeonSage Slack channel plugin",
+  "aeonsage": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@aeonsage/google-gemini-cli-auth",
+  "version": "2026.1.26",
+  "type": "module",
+  "description": "AeonSage Gemini CLI OAuth provider plugin",
+  "aeonsage": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

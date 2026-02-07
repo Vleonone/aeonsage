@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="80" viewBox="0 0 240 80">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a"/>
+      <stop offset="100%" style="stop-color:#0d0d0d"/>
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF751F"/>
+      <stop offset="100%" style="stop-color:#FF4500"/>
+    </linearGradient>
+    <!-- 六边形区块链暗纹 -->
+    <pattern id="hexPattern" x="0" y="0" width="20" height="34.64" patternUnits="userSpaceOnUse">
+      <path d="M10 0 L20 5.77 L20 17.32 L10 23.09 L0 17.32 L0 5.77 Z" 
+            fill="none" stroke="#FF751F" stroke-width="0.3" opacity="0.08"/>
+    </pattern>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="240" height="80" rx="4" fill="url(#shieldGrad)"/>
+  
+  <!-- 区块链暗纹 -->
+  <rect width="240" height="80" fill="url(#hexPattern)"/>
+  
+  <!-- 边框 -->
+  <rect x="1" y="1" width="238" height="78" rx="3" fill="none" stroke="url(#borderGrad)" stroke-width="2"/>
+  
+  <!-- 左侧盾牌图标 -->
+  <g transform="translate(20, 16)">
+    <!-- 盾牌形状 -->
+    <path d="M24 4 L44 12 L44 28 Q44 42 24 48 Q4 42 4 28 L4 12 Z" 
+          fill="#151515" 
+          stroke="#FF751F" 
+          stroke-width="2"/>
+    
+    <!-- 内层盾牌 -->
+    <path d="M24 8 L40 14 L40 27 Q40 38 24 43 Q8 38 8 27 L8 14 Z" 
+          fill="none" 
+          stroke="#FF751F" 
+          stroke-width="1" 
+          opacity="0.5"/>
+    
+    <!-- V 字母（不使用官方Logo，简化设计） -->
+    <path d="M14 18 L24 38 L34 18" 
+          fill="none" 
+          stroke="#FF751F" 
+          stroke-width="3" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+    
+    <!-- 对勾 -->
+    <path d="M30 14 L34 18 L42 10" 
+          fill="none" 
+          stroke="#00C853" 
+          stroke-width="2.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+  </g>
+  
+  <!-- 文字：VDID -->
+  <text x="75" y="32" 
+        font-family="system-ui, -apple-system, sans-serif" 
+        font-size="16" 
+        font-weight="700" 
+        fill="#ffffff" 
+        letter-spacing="2">
+    VDID
+  </text>
+  
+  <!-- 文字：Sovereign Identity Certified -->
+  <text x="75" y="50" 
+        font-family="system-ui, -apple-system, sans-serif" 
+        font-size="10" 
+        font-weight="500" 
+        fill="#FF751F" 
+        letter-spacing="0.5">
+    SOVEREIGN IDENTITY CERTIFIED
+  </text>
+  
+  <!-- 文字：Verified Decentralized Identity -->
+  <text x="75" y="64" 
+        font-family="system-ui, -apple-system, sans-serif" 
+        font-size="8" 
+        font-weight="400" 
+        fill="#666666" 
+        letter-spacing="0.3">
+    Verified Decentralized Identity
+  </text>
+  
+  <!-- 角落装饰 -->
+  <rect x="220" y="4" width="16" height="2" fill="#FF751F"/>
+  <rect x="234" y="4" width="2" height="16" fill="#FF751F"/>
+</svg>

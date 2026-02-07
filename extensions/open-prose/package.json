@@ -1,0 +1,11 @@
+{
+  "name": "@aeonsage/open-prose",
+  "version": "2026.1.26",
+  "type": "module",
+  "description": "OpenProse VM skill pack plugin (slash command + telemetry).",
+  "aeonsage": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

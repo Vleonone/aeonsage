@@ -1,0 +1,524 @@
+/**
+ * IDE Styles - Web IDE CSS
+ */
+
+/* Container */
+.ide-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.ide-dark {
+    --ide-bg: #1e1e1e;
+    --ide-bg-secondary: #252526;
+    --ide-bg-tertiary: #2d2d2d;
+    --ide-border: #3c3c3c;
+    --ide-text: #cccccc;
+    --ide-text-muted: #808080;
+    --ide-accent: #0078d4;
+    --ide-accent-hover: #1a8cff;
+    --ide-success: #4ec9b0;
+    --ide-error: #f14c4c;
+    --ide-warning: #cca700;
+}
+
+.ide-light {
+    --ide-bg: #ffffff;
+    --ide-bg-secondary: #f3f3f3;
+    --ide-bg-tertiary: #e8e8e8;
+    --ide-border: #e0e0e0;
+    --ide-text: #333333;
+    --ide-text-muted: #666666;
+    --ide-accent: #0066b8;
+    --ide-accent-hover: #0055a5;
+    --ide-success: #16825d;
+    --ide-error: #d32f2f;
+    --ide-warning: #bf8700;
+}
+
+/* Top Bar */
+.ide-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 12px;
+    background: var(--ide-bg-secondary);
+    border-bottom: 1px solid var(--ide-border);
+}
+
+.ide-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--ide-text);
+}
+
+.ide-logo-icon {
+    font-size: 20px;
+    color: var(--ide-accent);
+}
+
+.ide-topbar-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Buttons */
+.ide-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background: var(--ide-bg-tertiary);
+    color: var(--ide-text);
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.15s;
+}
+
+.ide-btn:hover {
+    background: var(--ide-border);
+}
+
+.ide-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.ide-btn-icon {
+    padding: 6px 8px;
+    font-size: 16px;
+}
+
+.ide-btn-sm {
+    padding: 4px 6px;
+    font-size: 12px;
+}
+
+.ide-btn-save {
+    background: var(--ide-accent);
+    color: white;
+}
+
+.ide-btn-save:hover {
+    background: var(--ide-accent-hover);
+}
+
+.ide-btn-send {
+    background: var(--ide-accent);
+    color: white;
+    font-weight: bold;
+}
+
+/* Main Layout */
+.ide-main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Sidebar (File Tree) */
+.ide-sidebar {
+    display: flex;
+    flex-direction: column;
+    background: var(--ide-bg-secondary);
+    border-right: 1px solid var(--ide-border);
+    min-width: 180px;
+    max-width: 400px;
+}
+
+.ide-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ide-text-muted);
+    border-bottom: 1px solid var(--ide-border);
+}
+
+.ide-file-tree {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 0;
+}
+
+.ide-file-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    color: var(--ide-text);
+    font-size: 13px;
+    transition: background 0.1s;
+}
+
+.ide-file-item:hover {
+    background: var(--ide-bg-tertiary);
+}
+
+.ide-file-selected {
+    background: var(--ide-accent) !important;
+    color: white;
+}
+
+.ide-file-icon {
+    font-size: 14px;
+}
+
+/* Center Panel */
+.ide-center {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+/* Editor Area */
+.ide-editor-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.ide-editor-tabs {
+    display: flex;
+    background: var(--ide-bg-secondary);
+    border-bottom: 1px solid var(--ide-border);
+}
+
+.ide-tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: var(--ide-text-muted);
+    border-right: 1px solid var(--ide-border);
+    cursor: pointer;
+}
+
+.ide-tab-active {
+    background: var(--ide-bg);
+    color: var(--ide-text);
+    border-bottom: 2px solid var(--ide-accent);
+}
+
+.ide-dirty {
+    color: var(--ide-warning);
+}
+
+.ide-editor {
+    flex: 1;
+    background: var(--ide-bg);
+    position: relative;
+}
+
+.ide-editor-textarea {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    border: none;
+    background: transparent;
+    color: var(--ide-text);
+    font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+    tab-size: 4;
+}
+
+.ide-welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    color: var(--ide-text-muted);
+    text-align: center;
+    padding: 40px;
+}
+
+.ide-welcome h2 {
+    color: var(--ide-text);
+    margin-bottom: 12px;
+}
+
+.ide-welcome-shortcuts {
+    margin-top: 24px;
+    font-size: 13px;
+}
+
+.ide-welcome-shortcuts div {
+    margin: 8px 0;
+}
+
+.ide-welcome kbd {
+    display: inline-block;
+    padding: 2px 6px;
+    background: var(--ide-bg-tertiary);
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+/* Terminal */
+.ide-terminal {
+    display: flex;
+    flex-direction: column;
+    background: var(--ide-bg-secondary);
+    border-top: 1px solid var(--ide-border);
+    min-height: 100px;
+    max-height: 50vh;
+}
+
+.ide-terminal-collapsed {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 12px;
+    background: var(--ide-bg-secondary);
+    border-top: 1px solid var(--ide-border);
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--ide-text-muted);
+}
+
+.ide-terminal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--ide-text-muted);
+    border-bottom: 1px solid var(--ide-border);
+}
+
+.ide-terminal-output {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 12px;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.ide-terminal-line {
+    display: flex;
+    gap: 8px;
+}
+
+.ide-terminal-input {
+    color: var(--ide-text);
+}
+
+.ide-terminal-output-line {
+    color: var(--ide-success);
+}
+
+.ide-terminal-error {
+    color: var(--ide-error);
+}
+
+.ide-terminal-system {
+    color: var(--ide-text-muted);
+    font-style: italic;
+}
+
+.ide-prompt {
+    color: var(--ide-accent);
+    font-weight: bold;
+}
+
+.ide-terminal-input-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-top: 1px solid var(--ide-border);
+}
+
+.ide-terminal-input-area input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: var(--ide-text);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    outline: none;
+}
+
+/* Chat Panel */
+.ide-chat-panel {
+    display: flex;
+    flex-direction: column;
+    background: var(--ide-bg-secondary);
+    border-left: 1px solid var(--ide-border);
+    min-width: 200px;
+    max-width: 500px;
+}
+
+.ide-chat-header {
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ide-text);
+    border-bottom: 1px solid var(--ide-border);
+}
+
+.ide-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+}
+
+.ide-chat-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--ide-text-muted);
+    text-align: center;
+    font-size: 13px;
+}
+
+.ide-chat-message {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.ide-chat-avatar {
+    font-size: 20px;
+}
+
+.ide-chat-content {
+    flex: 1;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ide-text);
+}
+
+.ide-chat-user .ide-chat-content {
+    background: var(--ide-bg-tertiary);
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.ide-chat-loading {
+    color: var(--ide-text-muted);
+    font-style: italic;
+    padding: 8px 0;
+}
+
+.ide-chat-input-area {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-top: 1px solid var(--ide-border);
+}
+
+.ide-chat-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--ide-border);
+    border-radius: 4px;
+    background: var(--ide-bg);
+    color: var(--ide-text);
+    font-size: 13px;
+    outline: none;
+}
+
+.ide-chat-input:focus {
+    border-color: var(--ide-accent);
+}
+
+/* Modal */
+.ide-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.ide-modal {
+    background: var(--ide-bg-secondary);
+    border-radius: 8px;
+    padding: 24px;
+    min-width: 300px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.ide-modal h3 {
+    margin: 0 0 16px;
+    color: var(--ide-text);
+}
+
+.ide-setting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--ide-text);
+}
+
+.ide-setting select,
+.ide-setting input {
+    padding: 6px 10px;
+    border: 1px solid var(--ide-border);
+    border-radius: 4px;
+    background: var(--ide-bg);
+    color: var(--ide-text);
+}
+
+/* Utilities */
+.ide-loading,
+.ide-error {
+    padding: 16px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.ide-loading {
+    color: var(--ide-text-muted);
+}
+
+.ide-error {
+    color: var(--ide-error);
+}
+
+/* Scrollbar */
+.ide-container ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.ide-container ::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.ide-container ::-webkit-scrollbar-thumb {
+    background: var(--ide-border);
+    border-radius: 4px;
+}
+
+.ide-container ::-webkit-scrollbar-thumb:hover {
+    background: var(--ide-text-muted);
+}
