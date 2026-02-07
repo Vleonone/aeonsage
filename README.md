@@ -1,4 +1,4 @@
-<div align="center">
+ï»¿<div align="center">
 
 <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/aeonsage_Banner.svg" alt="AEONSAGE" width="100%" loading="eager">
 
@@ -16,17 +16,17 @@
   <a href="https://github.com/velonone/Aeonsage/releases/latest">
     <img src="https://img.shields.io/badge/Download-macOS_Universal-000000?style=for-the-badge&logo=apple&logoColor=white" alt="Download macOS">
   </a>
-  <a href="https://github.com/velonone/Aeonsage/releases/latest">
+  <a href="https://github.com/velonone/Aeonsage/releases/latest/download/AeonSage_OSS.zip">
     <img src="https://img.shields.io/badge/Download-Windows_x64-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows">
   </a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-2026.1.28-blue?style=flat-square" alt="Version">
+  <img src="https://img.shields.io/badge/Version-2026.1.30-blue?style=flat-square" alt="Version">
   <img src="https://img.shields.io/badge/Node-v22+-green?style=flat-square&logo=node.js" alt="Node Version">
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-gray?style=flat-square" alt="License"></a>
   <a href="./docs/security.md"><img src="https://img.shields.io/badge/VDID-Verified_Identity-E8471C?style=flat-square&logo=fingerprint&logoColor=white" alt="VDID"></a>
-  <a href="./README_ZH.md"><img src="https://img.shields.io/badge/Language-ÖÐÎÄÎÄµµ-red?style=flat-square" alt="Chinese"></a>
+  <a href="./README_ZH.md"><img src="https://img.shields.io/badge/Language-ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½-red?style=flat-square" alt="Chinese"></a>
 </p>
 
 </div>
@@ -201,5 +201,6 @@ AeonSage is the convergence of high-integrity sovereign technologies.
 ---
 
 <div align="center">
-  <sub><strong>EST. 2025 ¡¤ AEONSAGE COLLECTIVE ¡¤ MIT LICENSE</strong></sub>
+  <sub><strong>EST. 2025 ï¿½ï¿½ AEONSAGE COLLECTIVE ï¿½ï¿½ MIT LICENSE</strong></sub>
 </div>
+
