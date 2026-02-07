@@ -157,21 +157,17 @@ Collaborating to build the Sovereign Web.
 
 <table>
   <tr>
-    <td align="center" width="25%">
-      <a href="https://vdid.org"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/logos/vdid-logo.svg" alt="VDID" width="80"></a><br>
-      <br><b>Identity Layer</b>
+    <td align="center" width="33%">
+      <a href="https://vdid.org"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/vdid-logo.svg" alt="VDID" width="100"></a><br>
+      <br><b>Identity Layer</b><br>(VDID Network)
     </td>
-    <td align="center" width="25%">
-      <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/AESE.png" alt="Kernel" width="80"><br>
-      <br><b>Cognitive Kernel</b>
+    <td align="center" width="33%">
+      <a href="https://github.com/velonone/Opensage"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="OpenSage" width="160"></a><br>
+      <br><b>Cognitive Kernel</b><br>(OpenSage Core)
     </td>
-    <td align="center" width="25%">
-      <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/AeonSage_Wisdom_2026_v4.png" alt="Research" width="100"><br>
-      <br><b>Research Lab</b>
-    </td>
-    <td align="center" width="25%">
-      <a href="https://velonlabs.com"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/velonlabs-logo.png" alt="VelonLabs" width="100"></a><br>
-      <br><b>System Engineering</b>
+    <td align="center" width="33%">
+      <a href="https://velonlabs.com"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/velonlabs-logo.png" alt="VelonLabs" width="120"></a><br>
+      <br><b>Research & Engineering</b><br>(VelonLabs)
     </td>
   </tr>
 </table>

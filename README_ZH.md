@@ -155,21 +155,17 @@ aeonsage start
 
 <table>
   <tr>
-    <td align="center" width="25%">
-      <a href="https://vdid.org"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/logos/vdid-logo.svg" alt="VDID" width="80"></a><br>
-      <br><b>身份层 (Identity)</b>
+    <td align="center" width="33%">
+      <a href="https://vdid.org"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/vdid-logo.svg" alt="VDID" width="100"></a><br>
+      <br><b>身份层</b><br>(VDID Network)
     </td>
-    <td align="center" width="25%">
-      <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/AESE.png" alt="Kernel" width="80"><br>
-      <br><b>认知内核 (Kernel)</b>
+    <td align="center" width="33%">
+      <a href="https://github.com/velonone/Opensage"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="OpenSage" width="160"></a><br>
+      <br><b>认知内核</b><br>(OpenSage Core)
     </td>
-    <td align="center" width="25%">
-      <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/AeonSage_Wisdom_2026_v4.png" alt="Research" width="100"><br>
-      <br><b>研究实验室 (Labs)</b>
-    </td>
-    <td align="center" width="25%">
-      <a href="https://velonlabs.com"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/velonlabs-logo.png" alt="VelonLabs" width="100"></a><br>
-      <br><b>系统工程 (System)</b>
+    <td align="center" width="33%">
+      <a href="https://velonlabs.com"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/velonlabs-logo.png" alt="VelonLabs" width="120"></a><br>
+      <br><b>研究与工程</b><br>(VelonLabs)
     </td>
   </tr>
 </table>
