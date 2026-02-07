@@ -1,22 +1,22 @@
-ï»¿<div align="center">
+<div align="center">
 
-<img src="./assets/aeonsage_Banner.svg" alt="AEONSAGE" width="100%" loading="eager">
+<img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/aeonsage_Banner.svg" alt="AEONSAGE" width="100%" loading="eager">
 
 **The Deterministic Foundation for Autonomous Agency**
 
 **A Joint Release by VelonLabs & @Aeonsage**
 
 <p>
-  <a href="https://aeonsage.org">Official Site</a> â€¢
-  <a href="https://docs.aeonsage.org">Technical Documentation</a> â€¢
+  <a href="https://aeonsage.org">Official Site</a> ?
+  <a href="https://docs.aeonsage.org">Technical Documentation</a> ?
   <a href="https://pro.aeonsage.org">Enterprise Solutions</a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/velonone/AeonsagePro/releases/latest">
+  <a href="https://github.com/velonone/Aeonsage/releases/latest">
     <img src="https://img.shields.io/badge/Download-macOS_Universal-000000?style=for-the-badge&logo=apple&logoColor=white" alt="Download macOS">
   </a>
-  <a href="https://github.com/velonone/AeonsagePro/releases/latest">
+  <a href="https://github.com/velonone/Aeonsage/releases/latest">
     <img src="https://img.shields.io/badge/Download-Windows_x64-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows">
   </a>
 </p>
@@ -26,7 +26,7 @@
   <img src="https://img.shields.io/badge/Node-v22+-green?style=flat-square&logo=node.js" alt="Node Version">
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-gray?style=flat-square" alt="License"></a>
   <a href="./docs/security.md"><img src="https://img.shields.io/badge/VDID-Verified_Identity-E8471C?style=flat-square&logo=fingerprint&logoColor=white" alt="VDID"></a>
-  <a href="./README_ZH.md"><img src="https://img.shields.io/badge/Language-ä¸­æ–‡æ–‡æ¡£-red?style=flat-square" alt="Chinese"></a>
+  <a href="./README_ZH.md"><img src="https://img.shields.io/badge/Language-ÖÐÎÄÎÄµµ-red?style=flat-square" alt="Chinese"></a>
 </p>
 
 </div>
@@ -148,7 +148,7 @@ graph LR
 
 ```bash
 # 1. Clone Sovereign Repository
-git clone https://github.com/velonone/AeonsagePro.git
+git clone https://github.com/velonone/Aeonsage.git
 
 # 2. Hydrate Dependencies
 corepack enable && pnpm install
@@ -170,7 +170,7 @@ AeonSage is the convergence of high-integrity sovereign technologies.
   <tr>
     <td align="center" width="33%">
       <a href="https://vdid.io">
-        <img src="./assets/vdid-logo.svg" alt="VDID" height="50" loading="lazy">
+        <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/vdid-logo.svg" alt="VDID" height="50" loading="lazy">
       </a>
       <br><br>
       <strong>Identity Layer</strong>
@@ -188,7 +188,7 @@ AeonSage is the convergence of high-integrity sovereign technologies.
     </td>
     <td align="center" width="33%">
       <a href="https://velonlabs.com">
-        <img src="./assets/velonlabs-logo.png" alt="VelonLabs" height="50" loading="lazy">
+        <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/velonlabs-logo.png" alt="VelonLabs" height="50" loading="lazy">
       </a>
       <br><br>
       <strong>Research Lab</strong>
@@ -201,5 +201,5 @@ AeonSage is the convergence of high-integrity sovereign technologies.
 ---
 
 <div align="center">
-  <sub><strong>EST. 2025 Â· AEONSAGE COLLECTIVE Â· MIT LICENSE</strong></sub>
+  <sub><strong>EST. 2025 ¡¤ AEONSAGE COLLECTIVE ¡¤ MIT LICENSE</strong></sub>
 </div>
