@@ -1,6 +1,6 @@
 ﻿<div align="center">
   <a href="https://aeonsage.org">
-    <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/aeonsage_Banner.svg" alt="AEONSAGE OS" width="100%" loading="eager">
+    <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="AEONSAGE OS" width="100%" loading="eager">
   </a>
   <br>
   
@@ -191,3 +191,4 @@ Collaborating to build the Sovereign Web.
   <br>
   <img src="https://img.shields.io/badge/Status-Active_Development-blue?style=flat-square" alt="Status">
 </div>
+
