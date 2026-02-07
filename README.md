@@ -5,6 +5,7 @@
   <br>
   
   [![Version](https://img.shields.io/badge/Release-v2026.1.30-0066FF?style=for-the-badge&labelColor=1a1a1a)](https://github.com/velonone/Aeonsage/releases)
+  [![OpenSage](https://img.shields.io/badge/OpenSage-Core_Repo-10B981?style=for-the-badge&labelColor=1a1a1a&logo=github)](https://github.com/velonone/Opensage)
   [![License](https://img.shields.io/badge/License-Non--Commercial-red?style=for-the-badge&labelColor=1a1a1a)](./LICENSE)
   [![Build](https://img.shields.io/badge/Build-Passing-2EA44F?style=for-the-badge&labelColor=1a1a1a)](https://github.com/velonone/Aeonsage/actions)
   [![Docs](https://img.shields.io/badge/Docs-Official-orange?style=for-the-badge&labelColor=1a1a1a)](https://docs.aeonsage.org)
@@ -23,6 +24,8 @@
 **AeonSage is not a chatbot; it is a Kernel.**
 
 In an era of probabilistic AI models that hallucinate and leak data, AeonSage introduces a **Sovereign Operating System** paradigm. It wraps stochastic LLMs in a deterministic runtime environment, enforcing **Identity Verification (VDID)**, **Cognitive Routing**, and **Operational Security** by design.
+
+> **Open Source Core**: The cognitive engine is open-sourced as [**OpenSage**](https://github.com/velonone/Opensage), providing a transparent foundation for sovereign identity.
 
 Unlike generic agent frameworks, AeonSage is architected for **Institutional Grade Agency**—where every action is validated, recorded, and attributable to a specific sovereign identity.
 
