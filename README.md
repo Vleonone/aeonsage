@@ -8,6 +8,7 @@
   [![OpenSage](https://img.shields.io/badge/OpenSage-Core_Repo-10B981?style=for-the-badge&labelColor=1a1a1a&logo=github)](https://github.com/velonone/Opensage)
   [![Build](https://img.shields.io/badge/Build-Passing-2EA44F?style=for-the-badge&labelColor=1a1a1a)](https://github.com/velonone/Aeonsage/actions)
   [![Docs](https://img.shields.io/badge/Docs-Official-orange?style=for-the-badge&labelColor=1a1a1a)](https://docs.aeonsage.org)
+  [![CN](https://img.shields.io/badge/Language-%E4%B8%AD%E6%96%87-red?style=for-the-badge&labelColor=1a1a1a)](./README_ZH.md)
 
   <br>
   <p style="font-size: 1.1em; max-width: 800px; margin: auto; padding-top: 20px; color: #666;">

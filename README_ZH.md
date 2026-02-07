@@ -1,189 +1,146 @@
 <div align="center">
-
-<img src="./OpenSage/assets/aeonsage_Banner.svg" alt="AEONSAGE" width="100%">
-
-**The Deterministic Foundation for Autonomous Agency**
-
-**VelonLabs + @Aeonsage 联合发布**
-
-<p>
-  <a href="https://aeonsage.org">官方网站</a> •
-  <a href="https://docs.aeonsage.org">技术文档</a> •
-  <a href="https://pro.aeonsage.org">企业方案</a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/velonone/AeonsagePro/releases/download/v2026.1.27/AeonSage-2026.1.27.dmg">
-    <img src="https://img.shields.io/badge/Download-macOS_Universal-000000?style=for-the-badge&logo=apple&logoColor=white" alt="Download macOS">
+  <a href="https://aeonsage.org">
+    <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/aeonsage_Banner.svg" alt="AEONSAGE OS" width="100%" loading="eager">
   </a>
-  <a href="https://github.com/velonone/AeonsagePro/releases/download/v2026.1.27/AeonSage-Setup-2026.1.27.exe">
-    <img src="https://img.shields.io/badge/Download-Windows_x64-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows">
-  </a>
-</p>
+  <br>
+  
+  [![Version](https://img.shields.io/badge/Release-v2026.1.30-0066FF?style=for-the-badge&labelColor=1a1a1a)](https://github.com/velonone/Aeonsage/releases)
+  [![OpenSage](https://img.shields.io/badge/OpenSage-%E6%A0%B8%E5%BF%83%E4%BB%93%E5%BA%93-10B981?style=for-the-badge&labelColor=1a1a1a&logo=github)](https://github.com/velonone/Opensage)
+  [![Build](https://img.shields.io/badge/Build-Passing-2EA44F?style=for-the-badge&labelColor=1a1a1a)](https://github.com/velonone/Aeonsage/actions)
+  [![Docs](https://img.shields.io/badge/Docs-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3-orange?style=for-the-badge&labelColor=1a1a1a)](https://docs.aeonsage.org)
 
-[![License](https://img.shields.io/badge/License-MIT-gray?style=flat-square)](./LICENSE)
-[![VDID](https://img.shields.io/badge/VDID-Verified_Identity-E8471C?style=flat-square&logo=fingerprint&logoColor=white)](./docs/security.md)
-
+  <br>
+  <p style="font-size: 1.1em; max-width: 800px; margin: auto; padding-top: 20px; color: #666;">
+    <b>确定性 · 主权级 · 智能操作系统</b><br>
+    开启主权之旅: <a href="https://aeonsage.org">官方网站</a> • <a href="https://pro.aeonsage.org">企业版</a>
+  </p>
 </div>
 
+<hr style="border: 0; outline: none; height: 1px; background: linear-gradient(to right, transparent, #30363d, transparent); margin: 40px 0;">
 
+## 主权宣言 (The Sovereign Manifesto)
 
----
+> **"身份先行，智能次之，工具为末。"**
 
-## 1. 主权宣言 (The Sovereign Thesis)
+在当前的 AI 浪潮中，**身份 (Identity)** 往往被视为事后补救的附庸。大模型不仅存在幻觉，更缺乏对上下文的严密保护，导致在执行关键任务时缺乏可归因性（Accountability）。
 
-**AeonSage** 是为了解决自主 Agent **熵增难题** 而设计的 **Layer-2 认知编织层 (Cognitive Fabric)**。区别于随机性的聊天机器人框架，AeonSage 提供了一个基于 **身份 (Identity)**、**安全 (Security)** 和 **经济 (Economics)** 三大公理的 **确定性运行时环境 (Deterministic Runtime)**。
+**AeonSage** 彻底逆转了这一范式。它是一个**操作系统**，将 **VDID (主权身份)** 确立为内核级的原语。在任何认知路由发生之前，系统会首先通过不可篡改的账本验证请求的来源、意图与权限。
 
-```mermaid
-graph TD
-    subgraph "Legacy (Entropy) / 传统熵增架构"
-        A[Stochastic LLM Wrappers] --> B[意图泄露]
-        A --> C[不可控成本]
-        A --> D[身份欺诈]
-    end
-
-    subgraph "AeonSage (Sovereignty) / 主权架构"
-        E[Deterministic Runtime] --> F[VDID 可验证身份]
-        E --> G[本地认知路由]
-        E --> H[上帝之钥熔断]
-    end
-
-    A -.->|Transformation| E
-```
+它不仅仅是一个聊天机器人，它是一个为**经认证的自主智能体**打造的**确定性运行时环境**。
 
 ---
 
-## 2. 架构规范 (Architectural Specifications)
+## 核心架构设计
 
-### 2.1 认知内核 (OpenSage Kernel)
+AeonSage 采用严格的 **内核环 (Kernel-Ring) 架构**，强制实现认知核心与外部 I/O 的安全隔离。
 
-**主权认知路由** 是一个本地优先的决策引擎。它在本地评估任务的复杂度与意图，杜绝了向云端泄露敏感的推理过程。
+### 1. 主权内核 (Ring 0)
+系统的绝对核心，不可妥协。
+*   **确定性状态机**: 管理 Agent 的生命周期、记忆上下文及权限边界。
+*   **主动防御墙**: 启发式安全层，在 Prompt 注入与越狱攻击触达模型前将其拦截。
+*   **审计日志**: 对所有高风险决策进行不可篡改的记录。
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant Router as Sovereign Router
-    participant Oracle as Local Oracle (SLM)
-    participant Cloud as Cloud LLM (Tier 3)
-    
-    User->>Router: 提交任务
-    Router->>Oracle: 分析复杂度与意图
-    Oracle-->>Router: <Score: 0.85> (高复杂度)
-    
-    alt Score < 0.4 (反射层)
-        Router->>Router: 本地执行 (Groq/Local)
-    else Score > 0.7 (综合层)
-        Router->>Cloud: 路由至 SOTA 模型 (VDID 签名)
-        Cloud-->>Router: 返回结果
-    end
-    
-    Router->>User: 确定性输出
-```
+### 2. 认知路由器 (Ring 1)
+抽象并统筹底层大模型的多模态推理引擎。
+*   **成本感知路由**: 将复杂的逻辑分发至 SOTA 模型（如 Claude 3.5），将日常对话路由至高速本地模型。
+*   **工具绑定**: 动态判断并挂载当前意图所需的 Ring 2 工具。
 
-### 2.2 多层防御体系 (Defense-in-Depth)
-
-| 组件 | 机制 | 目标 |
-| :--- | :--- | :--- |
-| **上帝之钥 (The God Key)** | WebSocket 熔断开关 | < 50ms 全局进程终止 |
-| **VDID** | `did:vdid` 加密签名 | 不可抵赖性与取证审计 |
-| **物理隔离主权** | 本地向量库 (ChromaDB) | 零遥测 (Zero-Telemetry) 运行 |
+### 3. 能力扩展层 (Ring 2)
+与纷繁复杂的数字世界交互的 I/O 层。
+*   **全渠道连接**: 原生桥接 WhatsApp, Telegram, Discord, Slack 等主流平台。
+*   **技能库**: 包含 GitHub 运维、Web 深度搜索、媒体控制等可执行模块。
 
 ---
 
-## 3. 认知经济学 (Cognitive Economics)
+## 4. 连接矩阵 (Connectivity Matrix)
 
-**乐观级联逻辑 (Optimistic Cascading Logic)** 通过将任务路由至最优层级，显著降低了运营成本。
+操作系统提供原生协议级桥接，无需依赖第三方自动化服务（如 Zapier）。
 
-| 认知层级 | 模型类别 | 成本基准 | 流量目标 |
-| :--- | :--- | :--- | :--- |
-| **Tier 1 (反射层)** | Local SLM / Groq | **~$0.05 / 1M** | 60% 流量 |
-| **Tier 2 (推理层)** | GPT-4o-mini | ~$0.15 / 1M | 30% 流量 |
-| **Tier 3 (综合层)** | Claude 3.5 / o1 | ~$15.00 / 1M | 10% 流量 |
-
----
-
-## 4. 集成标准 (The Nervous System)
-
-**通道抽象层 (Channel Abstraction Layer)** 为异构网络提供了统一的状态管理接口。
-
-| 网络协议 | 集成方法 | 安全上下文 |
-| :--- | :--- | :--- |
-| **Telegram** | MTProto Wrapper | VDID 签名载荷 |
-| **Discord** | OAuth2 Gateway | 基于角色的访问控制 (RBAC) |
-| **WhatsApp** | Baileys (WebSocket) | 保留端到端加密 |
-| **Signal** | Libsignal Client | 仅本地解密 |
-| **Terminal** | TUI Dashboard | Root / Sudo 上下文 |
+| 协议 / 平台 | 实现方式 | 核心能力 | 状态 |
+| :--- | :--- | :--- | :---: |
+| **WhatsApp** | `wacli` (Baileys) | 多设备登录、媒体收发、语音笔记 | ✅ |
+| **Telegram** | `MTProto` / Bot API | 私密聊天、频道管理、群组管理 | ✅ |
+| **Discord** | WebSocket Gateway | 语音频道推流、Slash 指令、角色映射 | ✅ |
+| **Slack** | Enterprise Grid | 线程支持、文件分析、App Home | ✅ |
+| **Signal** | `libsignal` | 端到端加密 (E2EE) 通信 | ✅ |
+| **Email** | SMTP / IMAP | 邮件解析、草稿撰写、附件处理 | ✅ |
 
 ---
 
-## 5. 部署协议 (Deployment Protocol)
+## 5. 部署指南
 
-### 初始化序列
+### 系统要求
+*   **OS**: Windows 11 / macOS 13+ / Linux Kernel 5.15+
+*   **运行时**: Node.js v22.0.0+ (Active LTS)
 
-```mermaid
-graph LR
-    A[克隆仓库] --> B[注入依赖]
-    B --> C[编译核心]
-    C --> D[点火网关]
-    
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style D fill:#bbf,stroke:#333,stroke-width:2px
-```
+### 快速启动 (便携版)
+对于 Windows 用户，我们提供零依赖的绿色版。
+1.  下载 **[AeonSage_OSS.zip](https://github.com/velonone/Aeonsage/releases/latest/download/AeonSage_OSS.zip)**。
+2.  解压压缩包。
+3.  运行 `AeonSage.bat`。
 
+### 开发者安装
 ```bash
-# 1. 克隆主权仓库
-git clone https://github.com/velonone/AeonsagePro.git
+# 通过 NPM 全局安装
+npm install -g aeonsage
 
-# 2. 注入依赖
-corepack enable && pnpm install
+# 初始化配置向导
+aeonsage init
 
-# 3. 编译核心
-pnpm build
-
-# 4. 点火网关
-pnpm aeonsage gateway
+# 启动内核
+aeonsage start
 ```
 
 ---
 
-## 6. 战略生态 (Strategic Ecosystem)
+## 6. 官方资源
 
-AeonSage 是高完整性主权技术的融合。
+文档结构面向系统运维人员与内核开发者设计。
 
-<table align="center" border="0" cellpadding="10">
+*   [**安装指南**](./docs/install.md)
+*   [**安全策略**](./docs/security.md)
+*   [**内核参考手册**](./docs/sovereign-kernel.md)
+*   [**插件开发指南**](./docs/plugin.md)
+
+---
+
+## 7. 生态合作伙伴
+
+我们与行业领导者共同定义主权智能的新标准。
+
+<table>
   <tr>
-    <td align="center" width="33%">
-      <a href="https://vdid.io">
-        <img src="./assets/vdid-logo.svg" alt="VDID" height="50">
-      </a>
-      <br><br>
-      <strong>Identity Layer</strong>
-      <br>
-      <sub>Verifiable Decentralized ID</sub>
+    <td align="center" width="25%">
+      <a href="https://vdid.org"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/logos/vdid-logo.svg" alt="VDID" width="80"></a><br>
+      <br><b>身份层 (Identity)</b>
     </td>
-    <td align="center" width="33%">
-      <a href="https://github.com/velonone/Opensage">
-        <img src="https://img.shields.io/badge/OpenSage-Core_Engine-000000?style=for-the-badge&logo=openai&logoColor=white" alt="OpenSage" height="50">
-      </a>
-      <br><br>
-      <strong>认知内核 (Kernel)</strong>
-      <br>
-      <sub>Local-First Reasoning Router</sub>
+    <td align="center" width="25%">
+      <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/AESE.png" alt="Kernel" width="80"><br>
+      <br><b>认知内核 (Kernel)</b>
     </td>
-    <td align="center" width="33%">
-      <a href="https://velonlabs.com">
-        <img src="./assets/velonlabs-logo.png" alt="VelonLabs" height="50">
-      </a>
-      <br><br>
-      <strong>Research Lab</strong>
-      <br>
-      <sub>Sovereign Architecture</sub>
+    <td align="center" width="25%">
+      <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/AeonSage_Wisdom_2026_v4.png" alt="Research" width="100"><br>
+      <br><b>研究实验室 (Labs)</b>
+    </td>
+    <td align="center" width="25%">
+      <a href="https://velonlabs.com"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/velonlabs-logo.png" alt="VelonLabs" width="100"></a><br>
+      <br><b>系统工程 (System)</b>
     </td>
   </tr>
 </table>
 
 ---
 
+## 许可与法律声明
+
+**AeonSage 社区版 (Community Edition)** 采用 **MIT 许可证** 分发。
+
+> **仅限非商业用途 (Non-Commercial Use Only)**: 尽管源代码是开源的，但 "AeonSage" 商标及 "VDID" 验证网络属于 VelonLabs 的专有技术。任何利用 AEONSAGE 品牌进行的商业衍生行为均需获得明确的企业授权。
+
 <div align="center">
-  <sub><strong>EST. 2025 · AEONSAGE COLLECTIVE · MIT LICENSE</strong></sub>
+  <br>
+  <b>Engineered with Precision by</b><br>
+  <h3>VelonLabs & The AeonSage Core Team</h3>
+  <br>
+  <img src="https://img.shields.io/badge/Status-Active_Development-blue?style=flat-square" alt="Status">
 </div>
