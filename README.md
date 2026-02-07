@@ -4,11 +4,11 @@
   </a>
   <br>
   
-  [![Version](https://img.shields.io/badge/Release-v2026.1.30-0066FF?style=for-the-badge&labelColor=1a1a1a)](https://github.com/velonone/Aeonsage/releases)
-  [![OpenSage](https://img.shields.io/badge/OpenSage-Core_Repo-10B981?style=for-the-badge&labelColor=1a1a1a&logo=github)](https://github.com/velonone/Opensage)
-  [![Build](https://img.shields.io/badge/Build-Passing-2EA44F?style=for-the-badge&labelColor=1a1a1a)](https://github.com/velonone/Aeonsage/actions)
-  [![Docs](https://img.shields.io/badge/Docs-Official-orange?style=for-the-badge&labelColor=1a1a1a)](https://docs.aeonsage.org)
-  [![CN](https://img.shields.io/badge/Language-%E4%B8%AD%E6%96%87-red?style=for-the-badge&labelColor=1a1a1a)](./README_ZH.md)
+  [![Release](https://img.shields.io/badge/RELEASE-v2026.1.30-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Aeonsage/releases)
+  [![Core](https://img.shields.io/badge/CORE-OpenSage-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Opensage)
+  [![License](https://img.shields.io/badge/LICENSE-Non--Commercial-000000?style=for-the-badge&logo=gitbook&logoColor=white)](./LICENSE)
+  [![Docs](https://img.shields.io/badge/DOCS-Official_Wiki-000000?style=for-the-badge&logo=readme&logoColor=white)](https://docs.aeonsage.org)
+  [![Language](https://img.shields.io/badge/LANG-中文文档-000000?style=for-the-badge&logo=google-translate&logoColor=white)](./README_ZH.md)
 
   <br>
   <p style="font-size: 1.1em; max-width: 800px; margin: auto; padding-top: 20px; color: #666;">
