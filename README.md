@@ -1,11 +1,11 @@
 ﻿<div align="center">
   <a href="https://aeonsage.org">
-    <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/aeonsage_Banner.svg" alt="AEONSAGE OS" width="100%" loading="eager">
+    <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/aeonsage_Banner.svg" alt="AEONSAGE" width="100%" loading="eager">
   </a>
   <br>
-  
+
   [![Release](https://img.shields.io/badge/RELEASE-v2026.1.30-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Aeonsage/releases)
-  [![Core](https://img.shields.io/badge/CORE-Aeonsage_OSS-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Aeonsage)
+  [![OSS](https://img.shields.io/badge/OSS-Aeonsage-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Aeonsage)
   [![License](https://img.shields.io/badge/LICENSE-Non--Commercial-000000?style=for-the-badge&logo=gitbook&logoColor=white)](./LICENSE)
   [![Docs](https://img.shields.io/badge/DOCS-Official_Wiki-000000?style=for-the-badge&logo=readme&logoColor=white)](https://docs.aeonsage.org)
   [![Language](https://img.shields.io/badge/LANG-中文文档-000000?style=for-the-badge&logo=google-translate&logoColor=white)](./README_ZH.md)
@@ -23,15 +23,6 @@
 
 > **"Identity first. Intelligence second. Tooling third."**
 
-### 1. The Sovereign Kernel (Ring 0)
-The absolute core of the system.
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="Aeonsage Cognitive Kernel" width="400">
-</p>
-
-*   **Determinsitic State Machine**: Manages the agent's lifecycle, memory context, and permission boundaries.
-*   **Active Defense Wall**: A heuristic security layer that intercepts prompt injection and jailbreak attempts before they reach the model.
-*   **Audit Logger**: Immutable recording of every high-stakes decision.
 In the current landscape of stochastic AI agents, **identity is an afterthought**. Models hallucinate, leak context, and operate without accountability.
 
 **AeonSage** reverses this paradigm. It is an Operating System where **Identity (VDID)** is the kernel-level primitive. Before any cognitive routing occurs, the origin, intent, and permissions of the request are verified against a sovereign ledger.
@@ -40,20 +31,11 @@ This is not a chatbot. It is a **Deterministic Runtime Environment** for verifie
 
 ---
 
-## Architecture Design
+## Architecture
 
 AeonSage implements a strict **Kernel-Ring Architecture**, enforcing separation between the cognitive core and external I/O.
 
-### 2.1 The Sovereign Transformation
-AeonSage acts as a **Deterministic Runtime** that stabilizes the entropy of raw LLMs via the **Aeonsage Cognitive Kernel**.
-
-<p align="center">
-  <a href="https://github.com/velonone/Aeonsage">
-    <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="Aeonsage Core" width="300">
-  </a>
-  <br>
-  [![Core](https://img.shields.io/badge/KERNEL-Aeonsage_OSS_v1.0-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Aeonsage)
-</p>
+### Sovereign Transformation
 
 ```mermaid
 graph LR
@@ -83,7 +65,7 @@ graph LR
     style Route fill:#0066FF,stroke:#333,color:#fff
 ```
 
-### 2.2 Cognitive Execution Sequence
+### Cognitive Execution Sequence
 Each user intent is treated as a verifiable transaction.
 
 ```mermaid
@@ -114,11 +96,27 @@ sequenceDiagram
     Router-->>User: Deterministic Response
 ```
 
+### Core Capabilities
+
+**Ring 0 — Sovereign Kernel**
+*   **Deterministic State Machine**: Manages lifecycle, memory context, and permission boundaries.
+*   **Active Defense Wall**: Heuristic security layer intercepting prompt injection and jailbreak attempts.
+*   **Audit Logger**: Immutable recording of every high-stakes decision.
+
+**Ring 1 — Cognitive Router**
+*   **Multi-LLM Routing**: Analyzes prompt complexity and routes to optimal model (local/cloud).
+*   **Tiered Selection**: Reflex (fast/cheap) → Standard → Deep (reasoning).
+*   **Provider Fallback**: Automatic cascade across OpenRouter, Groq, OpenAI, Anthropic, Google.
+
+**Ring 2 — Skill Extensions**
+*   **54+ Built-in Skills**: Code execution, file management, web scraping, media processing, and more.
+*   **Plugin SDK**: Extend with custom skills via the plugin development interface.
+
 ---
 
-## 4. Connectivity Matrix
+## Connectivity Matrix
 
-The OS provides native protocol bridges, eliminating the need for third-party automation services (like Zapier).
+Native protocol bridges — no third-party automation required.
 
 | Protocol | Implementation | Capabilities | Status |
 | :--- | :--- | :--- | :---: |
@@ -131,7 +129,7 @@ The OS provides native protocol bridges, eliminating the need for third-party au
 
 ---
 
-## 5. Deployment
+## Deployment Guide
 
 ### System Requirements
 *   **OS**: Windows 11 / macOS 13+ / Linux Kernel 5.15+
@@ -155,9 +153,7 @@ aeonsage init
 aeonsage start
 ```
 
----
-
-## 6. Edition Comparison
+### Edition Comparison
 
 AeonSage is available in two editions. The **Community Edition** is fully functional and open source.
 The **Professional Edition** unlocks enterprise-grade capabilities for teams and production workloads.
@@ -183,32 +179,15 @@ The **Professional Edition** unlocks enterprise-grade capabilities for teams and
 
 ---
 
-## 7. Official Resources
-
-Documentation is structured for system operators and kernel developers.
-
-*   [**Installation Guide**](./docs/install.md)
-*   [**Security Policy**](./docs/security.md)
-*   [**Kernel Reference**](./docs/sovereign-kernel.md)
-*   [**Plugin Development**](./docs/plugin.md)
-
----
-
-## 7. Ecosystem Partners
-
-Collaborating to build the Sovereign Web.
+## Ecosystem Partners
 
 <table>
   <tr>
-    <td align="center" width="33%">
+    <td align="center" width="50%">
       <a href="https://vdid.org"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/vdid-logo.svg" alt="VDID" width="100"></a><br>
       <br><b>Identity Layer</b><br>(VDID Network)
     </td>
-    <td align="center" width="33%">
-      <a href="https://github.com/velonone/Aeonsage"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="Aeonsage OSS" width="160"></a><br>
-      <br><b>Cognitive Kernel</b><br>(Aeonsage Core)
-    </td>
-    <td align="center" width="33%">
+    <td align="center" width="50%">
       <a href="https://velonlabs.com"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/velonlabs-logo.png" alt="VelonLabs" width="120"></a><br>
       <br><b>Research & Engineering</b><br>(VelonLabs)
     </td>

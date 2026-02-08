@@ -21,6 +21,6 @@ Yes. When configured in `AIRGAP_MODE=true`, the system disables all outbound HTT
 
 ## Licensing & Enterprise
 
-### Is OpenSage truly Open Source?
-Yes. The core kernel (`OpenSage`) is licensed under **MIT**. 
+### Is Aeonsage OSS truly Open Source?
+Yes. The core kernel (`Aeonsage OSS`) is licensed under **MIT**. 
 Enterprise modules (VDID-Server, Multi-Node Orchestrator) are available under the **AeonSage Commercial License** for institutional deployments requiring indemnity and SLAs.

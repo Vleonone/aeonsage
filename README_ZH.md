@@ -8,6 +8,7 @@
   [![Core](https://img.shields.io/badge/CORE-Aeonsage_OSS-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/velonone/Aeonsage)
   [![License](https://img.shields.io/badge/LICENSE-Non--Commercial-000000?style=for-the-badge&logo=gitbook&logoColor=white)](./LICENSE)
   [![Docs](https://img.shields.io/badge/DOCS-官方文档-000000?style=for-the-badge&logo=readme&logoColor=white)](https://docs.aeonsage.org)
+  [![Language](https://img.shields.io/badge/LANG-English-000000?style=for-the-badge&logo=google-translate&logoColor=white)](./README.md)
 
   <br>
   <p style="font-size: 1.1em; max-width: 800px; margin: auto; padding-top: 20px; color: #666;">
@@ -36,7 +37,7 @@ AeonSage 采用严格的 **内核环 (Kernel-Ring) 架构**，强制实现认知
 ### 2.1 主权转换 (Sovereign Transformation)
 <p align="center">
   <a href="https://github.com/velonone/Aeonsage">
-    <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="Aeonsage Core" width="400">
+    <img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/aeonsage_Banner_logo.svg" alt="Aeonsage Core" width="400">
   </a>
 </p>
 AeonSage 作为一个**确定性运行时 (Deterministic Runtime)**，将原始大模型的无序熵转化为有序的主权智能。
@@ -100,6 +101,22 @@ sequenceDiagram
     Router-->>User: 返回确定性响应
 ```
 
+### 2.3 核心能力 (Core Capabilities)
+
+**Ring 0 — 主权内核**
+*   **确定性状态机**: 管理生命周期、内存上下文与权限边界。
+*   **主动防御墙**: 启发式安全层，拦截提示注入与越狱攻击。
+*   **审计记录器**: 对每一项高风险决策进行不可篡改的记录。
+
+**Ring 1 — 认知路由**
+*   **多模型路由**: 分析提示复杂度并路由至最优模型（本地/云端）。
+*   **分级选择**: 反射级（快速/低成本） → 标准级 → 深度级（推理）。
+*   **提供商回退**: 自动在 OpenRouter、Groq、OpenAI、Anthropic、Google 之间级联切换。
+
+**Ring 2 — 技能扩展**
+*   **54+ 内置技能**: 代码执行、文件管理、网络爬虫、媒体处理等。
+*   **插件 SDK**: 通过插件开发接口扩展自定义技能。
+
 ---
 
 ## 4. 连接矩阵 (Connectivity Matrix)
@@ -141,6 +158,30 @@ aeonsage init
 aeonsage start
 ```
 
+### 版本对比
+
+AeonSage 提供两个版本。**社区版** 功能完整且开源。
+**专业版** 解锁面向团队和生产工作负载的企业级能力。
+
+| 类别 | 社区版 | 专业版 |
+| :--- | :---: | :---: |
+| **认知引擎** | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) |
+| **多模型路由** | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) |
+| **身份认证 (VDID)** | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) |
+| **消息通道** | ![4](https://img.shields.io/badge/4_个平台-E8832A?style=flat-square) | ![6+](https://img.shields.io/badge/6+_个平台-2ea44f?style=flat-square) |
+| **技能扩展** | ![Core](https://img.shields.io/badge/核心集-E8832A?style=flat-square) | ![Full](https://img.shields.io/badge/完整库-2ea44f?style=flat-square) |
+| **主动防御** | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) |
+| **加密保险库** | ![Pro](https://img.shields.io/badge/仅专业版-7B5EA7?style=flat-square) | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) |
+| **审计与合规** | ![Pro](https://img.shields.io/badge/仅专业版-7B5EA7?style=flat-square) | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) |
+| **控制面板** | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) |
+| **工作流构建器** | ![Pro](https://img.shields.io/badge/仅专业版-7B5EA7?style=flat-square) | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) |
+| **多智能体** | ![Pro](https://img.shields.io/badge/仅专业版-7B5EA7?style=flat-square) | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) |
+| **自托管** | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) |
+| **托管云** | ![Pro](https://img.shields.io/badge/仅专业版-7B5EA7?style=flat-square) | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) |
+| **优先支持** | ![Pro](https://img.shields.io/badge/仅专业版-7B5EA7?style=flat-square) | ![Yes](https://img.shields.io/badge/包含-2ea44f?style=flat-square) |
+
+> **对专业版感兴趣？** → [pro.aeonsage.org](https://pro.aeonsage.org)
+
 ---
 
 ## 6. 官方资源
@@ -160,15 +201,11 @@ aeonsage start
 
 <table>
   <tr>
-    <td align="center" width="33%">
+    <td align="center" width="50%">
       <a href="https://vdid.org"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/vdid-logo.svg" alt="VDID" width="100"></a><br>
       <br><b>身份层</b><br>(VDID Network)
     </td>
-    <td align="center" width="33%">
-      <a href="https://github.com/velonone/Aeonsage"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/opensage_Banner_logo.svg" alt="Aeonsage OSS" width="160"></a><br>
-      <br><b>认知内核</b><br>(Aeonsage Core)
-    </td>
-    <td align="center" width="33%">
+    <td align="center" width="50%">
       <a href="https://velonlabs.com"><img src="https://raw.githubusercontent.com/Vleonone/Aeonsage/main/assets/velonlabs-logo.png" alt="VelonLabs" width="120"></a><br>
       <br><b>研究与工程</b><br>(VelonLabs)
     </td>
