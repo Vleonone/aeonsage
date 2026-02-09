@@ -78,11 +78,47 @@ export class VDIDClient {
     return null;
   }
 
-  async registerIdentity(_data: unknown): Promise<unknown> {
-    return null;
+  async registerIdentity(
+    _serviceName: string,
+    _network: "base" | "ethereum" | "polygon" | "arbitrum" | "optimism" = "base",
+    _walletAddress?: string,
+    _publicKey?: string,
+  ): Promise<{
+    success: boolean;
+    identity: {
+      vid: string;
+      did: string;
+      serviceName: string;
+      network: string;
+      status: string;
+      vscoreTotal: number;
+      vscoreLevel: string;
+      registeredAt: string;
+    };
+    didDocument: {
+      "@context": string[];
+      id: string;
+      controller: string;
+      verificationMethod: Array<{ id: string; type: string; controller: string }>;
+      authentication: string[];
+      created: string;
+      updated: string;
+    };
+  }> {
+    throw new Error("VDID identity registration is not available in Open Source mode.");
   }
 
-  async checkActivationStatus(_vid: string): Promise<{ activated: boolean }> {
+  async checkActivationStatus(): Promise<{
+    activated: boolean;
+    vid?: string;
+    status?: string;
+    action?: {
+      method: string;
+      endpoint: string;
+      requiredScope: string;
+      exampleBody: object;
+    };
+  }> {
     return { activated: false };
   }
 
