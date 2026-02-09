@@ -1,0 +1,147 @@
+# Auto-generated API docs (rebuild with: pnpm docs:api)
+docs/api/
+
+# Separate repositories (not part of PRO repo)
+aeonsage-oss/
+homebrew-aeonsage/
+aeonsage-choco/
+
+# === Local Dev Artifacts (safe to ignore) ===
+guardian-cli-audit/
+_backups/
+backups/
+temp_*.json
+lint_errors.txt
+*.local.json
+reports/
+
+node_modules
+**/node_modules/
+.env
+.env.local
+.env.*
+!.env.example
+.planning/
+server-aeonsage.json
+minimal-config.json
+*-config.json
+docker-compose.extra.yml
+dist
+*.bun-build
+bun.lock
+bun.lockb
+coverage
+.pnpm-store
+.worktrees/
+.DS_Store
+**/.DS_Store
+ui/src/ui/__screenshots__/
+ui/playwright-report/
+ui/test-results/
+
+# Bun build artifacts
+*.bun-build
+apps/macos/.build/
+apps/shared/AeonSageKit/.build/
+**/ModuleCache/
+bin/
+bin/aeonsage-mac
+bin/docs-list
+apps/macos/.build-local/
+apps/macos/.swiftpm/
+apps/shared/AeonSageKit/.swiftpm/
+Core/
+apps/ios/*.xcodeproj/
+apps/ios/*.xcworkspace/
+apps/ios/.swiftpm/
+vendor/
+!vendor/a2ui/
+apps/ios/AeonSage.xcodeproj/
+apps/ios/AeonSage.xcodeproj/**
+apps/macos/.build/**
+**/*.bun-build
+apps/ios/*.xcfilelist
+
+# Vendor build artifacts
+vendor/a2ui/renderers/lit/dist/
+src/canvas-host/a2ui/*.bundle.js
+src/canvas-host/a2ui/*.map
+.bundle.hash
+
+# fastlane (iOS)
+apps/ios/fastlane/README.md
+apps/ios/fastlane/report.xml
+apps/ios/fastlane/Preview.html
+apps/ios/fastlane/screenshots/
+apps/ios/fastlane/test_output/
+apps/ios/fastlane/logs/
+apps/ios/fastlane/.env
+
+# fastlane build artifacts (local)
+apps/ios/*.ipa
+apps/ios/*.dSYM.zip
+
+# provisioning profiles (local)
+apps/ios/*.mobileprovision
+
+# Local untracked files
+.local/
+.vscode/
+IDENTITY.md
+USER.md
+.tgz
+
+# AeonSage State & Secrets (Runtime Data - NOT source code)
+.aeonsage/
+*.json.local
+credentials/
+auth/
+# NOTE: src/sessions/ and src/config/sessions/ are SOURCE CODE and should be tracked
+# Only ignore runtime session DATA directories
+data/sessions/
+state/sessions/
+
+# local tooling
+.serena/
+
+# Conversations & AI Metadata (NEVER PUSH)
+.gemini/
+.qoder/
+repowiki/
+.agent/
+.brain/
+.planning/
+**/zh/
+**/temp_brain/
+**/*brain*/
+**/conversation*/
+**/dialog*/
+
+# ═══════════════════════════════════════════════════════════════
+# PROTECTED: Enterprise & Proprietary (AeonsagePro ONLY)
+# These files exist in Pro repo but are excluded from open source
+# ═══════════════════════════════════════════════════════════════
+
+# VDID Identity System (Pro Feature)
+# src/security/vdid-client.ts
+# **/vdid_config*
+# **/vdid_integration*
+# **/.vdid_*
+
+# Enterprise Modules
+# src/enterprise/
+# src/proprietary-strategies/
+
+# Premium Skill Packs
+# skills/MASTER_*
+# skills/nexus-*
+
+# Pro Environment
+# .env.pro
+# .env.production.local
+
+# Internal Documentation (Pro Only)
+# docs/internal/
+# Sync Reports
+diff_report.json
+sync-check.json

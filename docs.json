@@ -1,0 +1,37 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "AeonSage",
+  "theme": "mint",
+  "logo": {
+    "light": "/assets/aeonsage-logo.svg",
+    "dark": "/assets/aeonsage-logo.svg"
+  },
+  "favicon": "/assets/aeonsage-logo.svg",
+  "colors": {
+    "primary": "#00D700"
+  },
+  "topbarLinks": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/Vleonone/AeonsagePro"
+    }
+  ],
+  "navigation": {
+    "groups": [
+      {
+        "group": "Start Here",
+        "pages": [
+          "index"
+        ]
+      },
+      {
+        "group": "Install & Updates",
+        "pages": [
+          "install/index",
+          "install/macos",
+          "install/windows"
+        ]
+      }
+    ]
+  }
+}

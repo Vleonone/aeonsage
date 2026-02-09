@@ -1,0 +1,54 @@
+name: Install Smoke
+
+on:
+  # Disabled: Repository is private, remote install scripts are not accessible
+  # Re-enable when repository is public or install scripts are hosted publicly
+  workflow_dispatch:
+
+jobs:
+  install-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          check-latest: true
+
+      - name: Get version
+        id: get_version
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm (corepack retry)
+        run: |
+          set -euo pipefail
+          corepack enable
+          for attempt in 1 2 3; do
+            if corepack prepare pnpm@10.23.0 --activate; then
+              pnpm -v
+              exit 0
+            fi
+            echo "corepack prepare failed (attempt $attempt/3). Retrying..."
+            sleep $((attempt * 10))
+          done
+          exit 1
+
+      - name: Install pnpm deps (minimal)
+        run: pnpm install --ignore-scripts --frozen-lockfile
+
+      - name: Run installer docker tests
+        env:
+          AEONSAGE_VERSION: ${{ steps.get_version.outputs.version }}
+          # Use local scripts instead of remote URLs (repository may be private)
+          AEONSAGE_INSTALL_URL: file://${{ github.workspace }}/scripts/quickstart.sh
+          AEONSAGE_INSTALL_CLI_URL: file://${{ github.workspace }}/scripts/quickstart-cli.sh
+          AEONSAGE_NO_ONBOARD: "1"
+          AEONSAGE_INSTALL_SMOKE_EXPECT_VERSION: ${{ steps.get_version.outputs.version }}
+          AEONSAGE_INSTALL_SMOKE_SKIP_CLI: "1"
+          AEONSAGE_INSTALL_SMOKE_SKIP_NONROOT: ${{ github.event_name == 'pull_request' && '1' || '0' }}
+          AEONSAGE_INSTALL_SMOKE_PREVIOUS: "2026.1.11-4"
+          AEONSAGE_INSTALL_SMOKE_SKIP_PREVIOUS: "1"
+        run: pnpm test:install:smoke

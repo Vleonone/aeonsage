@@ -1,0 +1,26 @@
+#!/bin/sh
+ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
+[ -z "$ROOT" ] && exit 0
+node "$ROOT/scripts/format-staged.js"
+
+# Auto-fix staged CSS files with Stylelint
+CHANGED_CSS=$(git diff --cached --name-only --diff-filter=ACM -- '*.css' | head -1)
+if [ -n "$CHANGED_CSS" ]; then
+  CSS_FILES=$(git diff --cached --name-only --diff-filter=ACM -- '*.css')
+  if command -v pnpm >/dev/null 2>&1; then
+    echo "[pre-commit] Checking CSS files..."
+    (cd "$ROOT" && npx stylelint --fix $CSS_FILES 2>/dev/null) || true
+    git add $CSS_FILES 2>/dev/null || true
+  fi
+fi
+
+# Auto-generate API docs if any .ts source files were changed
+CHANGED_TS=$(git diff --cached --name-only --diff-filter=ACM -- '*.ts' '*.tsx' | grep -v '.test.' | grep -v 'test-helpers' | head -1)
+if [ -n "$CHANGED_TS" ]; then
+  if command -v pnpm >/dev/null 2>&1; then
+    echo "[pre-commit] Regenerating API docs..."
+    (cd "$ROOT" && pnpm docs:api 2>/dev/null) || true
+    # Stage updated docs if any were generated
+    git add "$ROOT/docs/api/" 2>/dev/null || true
+  fi
+fi

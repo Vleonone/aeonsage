@@ -1,0 +1,46 @@
+﻿services:
+  aeonsage-gateway:
+    image: ${AEONSAGE_IMAGE:-aeonsage:local}
+    environment:
+      HOME: /home/node
+      TERM: xterm-256color
+      AEONSAGE_GATEWAY_TOKEN: ${AEONSAGE_GATEWAY_TOKEN}
+      CLAUDE_AI_SESSION_KEY: ${CLAUDE_AI_SESSION_KEY}
+      CLAUDE_WEB_SESSION_KEY: ${CLAUDE_WEB_SESSION_KEY}
+      CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE}
+    volumes:
+      - ${AEONSAGE_CONFIG_DIR}:/home/node/.aeonsage
+      - ${AEONSAGE_WORKSPACE_DIR}:/home/node/aeonsage
+    ports:
+      - "${AEONSAGE_GATEWAY_PORT:-18789}:18789"
+      - "${AEONSAGE_BRIDGE_PORT:-18790}:18790"
+    init: true
+    restart: unless-stopped
+    command:
+      [
+        "node",
+        "dist/index.js",
+        "gateway",
+        "--bind",
+        "${AEONSAGE_GATEWAY_BIND:-lan}",
+        "--port",
+        "${AEONSAGE_GATEWAY_PORT:-18789}"
+      ]
+
+  aeonsage-cli:
+    image: ${AEONSAGE_IMAGE:-aeonsage:local}
+    environment:
+      HOME: /home/node
+      TERM: xterm-256color
+      BROWSER: echo
+      CLAUDE_AI_SESSION_KEY: ${CLAUDE_AI_SESSION_KEY}
+      CLAUDE_WEB_SESSION_KEY: ${CLAUDE_WEB_SESSION_KEY}
+      CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE}
+    volumes:
+      - ${AEONSAGE_CONFIG_DIR}:/home/node/.aeonsage
+      - ${AEONSAGE_WORKSPACE_DIR}:/home/node/aeonsage
+    stdin_open: true
+    tty: true
+    init: true
+    entrypoint: ["node", "dist/index.js"]
+

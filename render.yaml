@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: aeonsage
+    runtime: docker
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: SETUP_PASSWORD
+        sync: false
+      - key: AEONSAGE_STATE_DIR
+        value: /data/.aeonsage
+      - key: AEONSAGE_WORKSPACE_DIR
+        value: /data/workspace
+      - key: AEONSAGE_GATEWAY_TOKEN
+        generateValue: true
+    disk:
+      name: aeonsage-data
+      mountPath: /data
+      sizeGB: 1

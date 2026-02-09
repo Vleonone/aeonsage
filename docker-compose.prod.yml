@@ -1,0 +1,31 @@
+services:
+  aeonsage:
+    image: aeonsage:latest
+    container_name: aeonsage-hub
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "${AEONSAGE_PORT:-18789}:18789"
+      - "${AEONSAGE_BRIDGE_PORT:-18790}:18790"
+    environment:
+      - AEONSAGE_GATEWAY_TOKEN=${AEONSAGE_GATEWAY_TOKEN}
+      - AEONSAGE_GATEWAY_BIND=0.0.0.0
+      - AEONSAGE_GATEWAY_PORT=18789
+      - NODE_ENV=production
+    volumes:
+      - ./data:/home/node/.aeonsage
+      - ./workspace:/home/node/aeonsage
+    # Resource limits for high-density hosting
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2G
+        reservations:
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

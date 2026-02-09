@@ -1,0 +1,23 @@
+# Project — Cursor IDE Rules
+# For detailed rules, see .clinerules/ directory
+
+## Quick Reference
+- Language: TypeScript ESM (strict mode, Node 22+)
+- Package Manager: pnpm 10+
+- Build: `pnpm build` (tsc)
+- Lint: `pnpm lint` (oxlint)
+- Test: `pnpm test` (vitest, V8 coverage 70%)
+
+## Naming
+- Files: kebab-case | Classes: PascalCase | Functions: camelCase
+
+## Security (Non-Negotiable)
+- NO hardcoded secrets/API keys/tokens
+- NO `eval()` or `Function()` constructor
+- NO `console.log` for debugging (use logging infrastructure)
+- NO `any` without justification comment
+- NO mock/placeholder data in src/ files (tests only)
+- Validate all external input (Zod at boundaries)
+
+## Full Rules
+See `.clinerules/` for comprehensive standards.

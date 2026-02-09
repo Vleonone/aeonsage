@@ -1,0 +1,75 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "color-no-invalid-hex": true,
+    "color-named": [true, { "severity": "warning", "message": "Use CSS token var(--*) instead of named color" }],
+    "color-no-hex": null,
+    "color-function-notation": null,
+    "color-function-alias-notation": null,
+    "color-hex-length": null,
+
+    "font-family-no-duplicate-names": true,
+    "font-family-no-missing-generic-family-keyword": true,
+
+    "declaration-no-important": [true, { "severity": "warning", "message": "Avoid !important — restructure selectors or use token specificity" }],
+    "declaration-property-value-keyword-no-deprecated": [true, { "severity": "warning" }],
+    "declaration-empty-line-before": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "declaration-block-no-shorthand-property-overrides": true,
+    "declaration-block-single-line-max-declarations": null,
+
+    "no-duplicate-selectors": [true, { "severity": "warning" }],
+    "no-descending-specificity": [true, { "severity": "warning" }],
+
+    "custom-property-pattern": null,
+    "custom-property-no-missing-var-function": true,
+    "custom-property-empty-line-before": null,
+
+    "comment-empty-line-before": null,
+    "comment-whitespace-inside": null,
+    "rule-empty-line-before": null,
+    "value-keyword-case": null,
+
+    "length-zero-no-unit": [true, { "severity": "warning" }],
+    "number-max-precision": 6,
+
+    "unit-allowed-list": ["px", "em", "rem", "%", "vh", "vw", "dvh", "dvw", "ms", "s", "deg", "fr", "ch", "vmin", "vmax", "svh", "lvh"],
+
+    "selector-max-id": 0,
+    "selector-max-specificity": ["0,4,4", { "severity": "warning" }],
+    "selector-pseudo-element-colon-notation": "double",
+    "selector-class-pattern": null,
+    "selector-not-notation": null,
+    "keyframes-name-pattern": null,
+
+    "media-feature-range-notation": null,
+
+    "property-no-vendor-prefix": null,
+    "property-no-deprecated": [true, { "severity": "warning" }],
+    "value-no-vendor-prefix": null,
+    "shorthand-property-no-redundant-values": [true, { "severity": "warning" }],
+
+    "at-rule-no-unknown": [true, {
+      "ignoreAtRules": ["import", "media", "supports", "keyframes", "font-face", "layer", "container", "property"]
+    }],
+
+    "import-notation": null,
+    "alpha-value-notation": null
+  },
+  "overrides": [
+    {
+      "files": ["ui/src/styles/base.css"],
+      "rules": {
+        "no-duplicate-selectors": null
+      }
+    }
+  ],
+  "ignoreFiles": [
+    "dist/**",
+    "node_modules/**",
+    "docs/api/**",
+    "coverage/**",
+    "*.min.css"
+  ]
+}

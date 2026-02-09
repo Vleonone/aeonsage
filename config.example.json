@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.8",
+    "description": "AeonSage Gateway 完整配置模板 - VPS 部署推荐配置"
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "0.0.0.0",
+    "auth": {
+      "mode": "token",
+      "token": "your-secure-token-here"
+    }
+  },
+  "models": {
+    "providers": {
+      "ollama": {
+        "apiKey": "ollama",
+        "baseUrl": "http://127.0.0.1:11434/v1",
+        "enabled": true
+      },
+      "openai": {
+        "apiKey": "sk-proj-your-openai-key",
+        "baseUrl": "https://api.openai.com/v1",
+        "enabled": false
+      },
+      "anthropic": {
+        "apiKey": "sk-ant-your-claude-key",
+        "baseUrl": "https://api.anthropic.com",
+        "enabled": false
+      },
+      "kimi": {
+        "apiKey": "your-kimi-key",
+        "baseUrl": "https://api.moonshot.cn/v1",
+        "enabled": false
+      },
+      "nvidia": {
+        "apiKey": "your-nvidia-key",
+        "baseUrl": "https://integrate.api.nvidia.com/v1",
+        "enabled": false
+      }
+    }
+  },
+  "cognitive": {
+    "enabled": true,
+    "oracle": {
+      "enabled": true,
+      "provider": "ollama",
+      "model": "qwen2.5:0.5b",
+      "timeout": 1000
+    },
+    "routing": {
+      "enabled": true,
+      "tiers": {
+        "reflex": {
+          "models": ["ollama:qwen2.5:0.5b", "openrouter:groq/llama-3-8b-8192"],
+          "maxComplexity": 3
+        },
+        "standard": {
+          "models": ["nvidia:kimi-k2.5", "gpt-4o-mini"],
+          "maxComplexity": 7
+        },
+        "deep": {
+          "models": ["claude-3-5-sonnet-20240620", "gpt-4o"],
+          "maxComplexity": 10
+        }
+      },
+      "fallbackModel": "gpt-4o-mini"
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "ollama/qwen2.5:0.5b"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": false,
+      "configWrites": true,
+      "dmPolicy": "open",
+      "allowFrom": ["*"],
+      "groupPolicy": "allowlist",
+      "streamMode": "partial",
+      "reactionLevel": "extensive",
+      "accounts": {
+        "default": {
+          "enabled": false,
+          "botToken": "your-telegram-bot-token",
+          "dmPolicy": "open",
+          "allowFrom": ["*"],
+          "groupPolicy": "allowlist",
+          "streamMode": "partial"
+        }
+      }
+    },
+    "discord": {
+      "enabled": false,
+      "token": "your-discord-bot-token",
+      "applicationId": "your-application-id",
+      "prefix": "!ai",
+      "mentionRequired": true,
+      "allowedChannels": [],
+      "allowedRoles": [],
+      "useThreads": true,
+      "threadAutoArchiveDuration": 60
+    },
+    "slack": {
+      "enabled": false,
+      "token": "xoxb-your-slack-bot-token",
+      "appToken": "xapp-your-slack-app-token",
+      "signingSecret": "your-signing-secret"
+    }
+  },
+  "plugins": {
+    "enabled": true
+  },
+  "session": {
+    "crossChannelMemory": true,
+    "maxHistoryLength": 50,
+    "persistToDisk": true,
+    "expirationHours": 24
+  }
+}

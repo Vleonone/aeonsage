@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 Documentation
+    url: https://docs.aeonsage.org
+    about: Check our documentation before opening an issue
+  - name: 💬 Discord Community
+    url: https://discord.gg/aeonsage
+    about: Get help from the community
+  - name: 🔒 Security Vulnerability
+    url: https://github.com/Vleonone/AeonSage-Silicon-Intelligence/security/policy
+    about: Report security vulnerabilities privately

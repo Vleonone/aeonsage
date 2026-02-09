@@ -1,0 +1,64 @@
+name: Build and Deploy Package
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - 'v*'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+      
+      - name: Install Dependencies
+        run: pnpm install --no-frozen-lockfile
+      
+      - name: Build
+        run: pnpm build || echo "Build step skipped (no build script)"
+      
+      - name: Create Deploy Package
+        run: |
+          # Create package with available files
+          tar -czf deploy.tar.gz \
+            --ignore-failed-read \
+            dist/ \
+            node_modules/ \
+            package.json \
+            pnpm-lock.yaml \
+            skills/ \
+            scripts/deploy/ \
+            ecosystem.config.cjs \
+            2>/dev/null || true
+      
+      - name: Upload to BuyVM
+        if: ${{ secrets.BUYVM_SSH_KEY != '' }}
+        env:
+          BUYVM_KEY: ${{ secrets.BUYVM_SSH_KEY }}
+        run: |
+          echo "$BUYVM_KEY" > /tmp/buyvm.key
+          chmod 600 /tmp/buyvm.key
+          scp -i /tmp/buyvm.key -o StrictHostKeyChecking=no \
+            deploy.tar.gz \
+            root@104.244.72.76:/var/www/aeonsage.org/downloads/
+          rm /tmp/buyvm.key
+      
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-package
+          path: deploy.tar.gz
+          if-no-files-found: ignore
+

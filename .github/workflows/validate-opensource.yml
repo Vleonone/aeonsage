@@ -1,0 +1,57 @@
+name: Validate Opensource Safety
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'ui/**'
+      - 'extensions/**'
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Scan for Proprietary Patterns
+        run: |
+          # 0. Check if we are in the OSS repo
+          if [ -f "package.json" ]; then
+             PKG_NAME=$(grep '"name":' package.json | head -n 1 | sed 's/.*: "\(.*\)".*/\1/' | tr -d ',')
+             if [[ "$PKG_NAME" != *"opensource"* ]]; then
+                echo "⚠️  Detected PRO repository (name: $PKG_NAME). Skipping OSS safety checks."
+                exit 0
+             fi
+          fi
+
+          PATTERNS=(
+            "god-key"
+            "enterprise-only"
+            "@tier: pro"
+            "PROPRIETARY"
+          )
+          
+          echo "🔍 Scanning for proprietary code leaks..."
+          
+          FAILures=0
+          for pattern in "${PATTERNS[@]}"; do
+            # Use grep to find pattern, exclude matched files itself if false positives exist
+            # We search recursively in src/
+            if grep -r "$pattern" src/ 2>/dev/null; then
+              echo "❌ Security Violation: '$pattern' found in opensource codebase!"
+              FAILures=$((FAILures+1))
+            fi
+          done
+          
+          # Check for specific files that should NOT exist
+          if [ -d "src/enterprise" ]; then
+             echo "❌ Security Violation: src/enterprise directory present!"
+             FAILures=$((FAILures+1))
+          fi
+          
+          if [ "$FAILures" -gt 0 ]; then
+            exit 1
+          fi
+          
+          echo "✅ Security scan passed. No proprietary code found."

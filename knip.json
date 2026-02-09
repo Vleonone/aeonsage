@@ -1,0 +1,24 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": ["src/index.ts", "src/entry.ts", "src/plugin-sdk/index.ts"],
+  "project": ["src/**/*.ts"],
+  "ignore": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/test-helpers*",
+    "scripts/**"
+  ],
+  "ignoreDependencies": [
+    "@typescript/native-preview",
+    "oxfmt",
+    "oxlint",
+    "oxlint-tsgolint",
+    "tsdown",
+    "tsx",
+    "wireit",
+    "chromium-bidi",
+    "ghost-cursor",
+    "puppeteer-extra",
+    "puppeteer-extra-plugin-stealth"
+  ]
+}

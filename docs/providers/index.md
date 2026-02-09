@@ -47,6 +47,9 @@ See [Venice AI](/providers/venice).
 - [MiniMax](/providers/minimax)
 - [Venius (Venice AI, privacy-focused)](/providers/venice)
 - [Ollama (local models)](/providers/ollama)
+- [xAI (Grok 3)](/providers/xai)
+- [Baidu Qianfan (ERNIE)](/providers/baidu-qianfan)
+- [Cloudflare AI Gateway](/providers/cloudflare-ai)
 
 ## Transcription providers
 

@@ -1,0 +1,48 @@
+# AeonsagePro — Cursor IDE Rules
+# For detailed rules, see .clinerules/ directory
+
+## Quick Reference
+- Language: TypeScript ESM (strict mode, Node 22+)
+- Package Manager: pnpm 10+
+- Build: `pnpm build` (tsc)
+- Lint: `pnpm lint` (oxlint)
+- Test: `pnpm test` (vitest, V8 coverage 70%)
+- Format: `pnpm format` (oxfmt)
+
+## Naming
+- Product: **AeonSage** | CLI: `aeonsage`
+- Files: kebab-case | Classes: PascalCase | Functions: camelCase
+
+## Import Rules
+- ESM only, `.js` suffix in import paths
+- External libs first, then internal modules
+
+## Security (Non-Negotiable)
+- NO hardcoded secrets/API keys/tokens
+- NO `eval()` or `Function()` constructor
+- NO `console.log` for debugging (use src/logging/)
+- NO `any` without biome-ignore justification
+- NO mock/placeholder data in src/ files (tests only)
+- Validate all external input (Zod at boundaries)
+
+## Production Standards
+- Every error path must be handled with meaningful messages
+- Every external API call needs timeout + retry + error handling
+- Mock data in tests must reflect complete, real data shapes
+- No TODO/FIXME without tracking issue number
+- Code must work with real data at real scale
+
+## AI Engine (pi-mono 0.52.9)
+- Use `AuthStorage` class + `ModelRegistry` class
+- ToolDefinition.execute: (toolCallId, params, signal, onUpdate, ctx)
+- Do NOT use deprecated discoverAuthStorage/discoverModels
+
+## Full Rules
+See `.clinerules/` for comprehensive rules:
+- 01-architecture.md — project structure & layers
+- 02-coding-standards.md — style & naming
+- 03-testing.md — vitest config & mocking
+- 04-security.md — security red lines
+- 05-git-workflow.md — commit & PR process
+- 06-docs.md — documentation conventions
+- 07-production-standards.md — production-grade enforcement

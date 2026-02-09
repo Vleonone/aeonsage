@@ -1,0 +1,24 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts", "src/plugin-sdk/index.ts"],
+  "out": "docs/api",
+  "tsconfig": "tsconfig.json",
+  "name": "AeonsagePro API",
+  "readme": "none",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/test-helpers*",
+    "node_modules/**"
+  ],
+  "skipErrorChecking": true,
+  "hideGenerator": true,
+  "githubPages": false,
+  "navigation": {
+    "includeCategories": true,
+    "includeGroups": true
+  }
+}

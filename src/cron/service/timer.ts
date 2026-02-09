@@ -7,16 +7,55 @@ import { ensureLoaded, persist } from "./store.js";
 
 const MAX_TIMEOUT_MS = 2 ** 31 - 1;
 
+// --- Exponential backoff tracking (in-memory, no schema change) ---
+const jobConsecutiveErrors = new Map<string, number>();
+const BACKOFF_BASE_MS = 5_000;
+const BACKOFF_MAX_MS = 15 * 60_000; // 15 minutes cap
+
+function getBackoffDelayMs(jobId: string): number {
+  const errors = jobConsecutiveErrors.get(jobId) ?? 0;
+  if (errors <= 0) return 0;
+  // Exponential: 5s, 10s, 20s, 40s, ... capped at 15min
+  return Math.min(BACKOFF_BASE_MS * 2 ** (errors - 1), BACKOFF_MAX_MS);
+}
+
+function recordJobSuccess(jobId: string) {
+  jobConsecutiveErrors.delete(jobId);
+}
+
+function recordJobError(jobId: string) {
+  const current = jobConsecutiveErrors.get(jobId) ?? 0;
+  jobConsecutiveErrors.set(jobId, current + 1);
+}
+
+// --- Timer drift correction ---
+const DRIFT_TOLERANCE_MS = 2_000; // 2s tolerance
+let lastExpectedFireMs = 0;
+
+// --- Missed-run catch-up ---
+const MISSED_RUN_THRESHOLD_MS = 60_000; // 1 minute past due = missed
+
 export function armTimer(state: CronServiceState) {
   if (state.timer) clearTimeout(state.timer);
   state.timer = null;
   if (!state.deps.cronEnabled) return;
   const nextAt = nextWakeAtMs(state);
   if (!nextAt) return;
-  const delay = Math.max(nextAt - state.deps.nowMs(), 0);
+  const now = state.deps.nowMs();
+  const delay = Math.max(nextAt - now, 0);
   // Avoid TimeoutOverflowWarning when a job is far in the future.
   const clampedDelay = Math.min(delay, MAX_TIMEOUT_MS);
+  lastExpectedFireMs = now + clampedDelay;
   state.timer = setTimeout(() => {
+    // Drift correction: if setTimeout fired significantly late, log it.
+    const actualFireMs = state.deps.nowMs();
+    const drift = actualFireMs - lastExpectedFireMs;
+    if (drift > DRIFT_TOLERANCE_MS) {
+      state.deps.log.warn(
+        { driftMs: drift, expectedMs: lastExpectedFireMs, actualMs: actualFireMs },
+        "cron: timer drift detected, correcting",
+      );
+    }
     void onTimer(state).catch((err) => {
       state.deps.log.error({ err: String(err) }, "cron: timer tick failed");
     });
@@ -46,8 +85,36 @@ export async function runDueJobs(state: CronServiceState) {
     if (!j.enabled) return false;
     if (typeof j.state.runningAtMs === "number") return false;
     const next = j.state.nextRunAtMs;
-    return typeof next === "number" && now >= next;
+    if (typeof next !== "number" || now < next) return false;
+
+    // Exponential backoff: skip job if still in backoff window.
+    const backoffMs = getBackoffDelayMs(j.id);
+    if (backoffMs > 0) {
+      const lastRun = j.state.lastRunAtMs ?? 0;
+      if (now - lastRun < backoffMs) {
+        state.deps.log.debug(
+          { jobId: j.id, backoffMs, sinceLastRunMs: now - lastRun },
+          "cron: job in backoff, skipping this tick",
+        );
+        return false;
+      }
+    }
+
+    return true;
   });
+
+  // Missed-run catch-up: detect and log jobs that were significantly past due.
+  for (const job of due) {
+    const next = job.state.nextRunAtMs ?? now;
+    const overdueMs = now - next;
+    if (overdueMs > MISSED_RUN_THRESHOLD_MS) {
+      state.deps.log.info(
+        { jobId: job.id, overdueMs, scheduledMs: next, nowMs: now },
+        "cron: catch-up — running missed job",
+      );
+    }
+  }
+
   for (const job of due) {
     await executeJob(state, job, now, { forced: false });
   }
@@ -78,6 +145,20 @@ export async function executeJob(
     job.state.lastStatus = status;
     job.state.lastDurationMs = Math.max(0, endedAt - startedAt);
     job.state.lastError = err;
+
+    // Track consecutive errors for exponential backoff.
+    if (status === "error") {
+      recordJobError(job.id);
+      const backoff = getBackoffDelayMs(job.id);
+      if (backoff > 0) {
+        state.deps.log.info(
+          { jobId: job.id, backoffMs: backoff, consecutiveErrors: jobConsecutiveErrors.get(job.id) },
+          "cron: applying exponential backoff after error",
+        );
+      }
+    } else if (status === "ok") {
+      recordJobSuccess(job.id);
+    }
 
     const shouldDelete =
       job.schedule.kind === "at" && status === "ok" && job.deleteAfterRun === true;

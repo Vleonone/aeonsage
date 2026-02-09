@@ -1,5 +1,9 @@
 import { markdownToTelegramHtmlChunks } from "../../../telegram/format.js";
-import { sendMessageTelegram } from "../../../telegram/send.js";
+import {
+  sendMessageTelegram,
+  sendStickerTelegram,
+  sendVideoNoteTelegram,
+} from "../../../telegram/send.js";
 import type { ChannelOutboundAdapter } from "../types.js";
 
 function parseReplyToMessageId(replyToId?: string | null) {
@@ -56,9 +60,40 @@ export const telegramOutbound: ChannelOutboundAdapter = {
     const replyToMessageId = parseReplyToMessageId(replyToId);
     const messageThreadId = parseThreadId(threadId);
     const telegramData = payload.channelData?.telegram as
-      | { buttons?: Array<Array<{ text: string; callback_data: string }>> }
+      | {
+          buttons?: Array<Array<{ text: string; callback_data: string }>>;
+          sticker?: string;
+          videoNote?: string;
+          videoNoteDuration?: number;
+          videoNoteLength?: number;
+        }
       | undefined;
     const text = payload.text ?? "";
+
+    // Handle sticker payloads (file_id based).
+    if (telegramData?.sticker) {
+      const result = await sendStickerTelegram(to, telegramData.sticker, {
+        verbose: false,
+        messageThreadId,
+        replyToMessageId,
+        accountId: accountId ?? undefined,
+      });
+      return { channel: "telegram", ...result };
+    }
+
+    // Handle video note payloads (circular video messages).
+    if (telegramData?.videoNote) {
+      const result = await sendVideoNoteTelegram(to, telegramData.videoNote, {
+        verbose: false,
+        messageThreadId,
+        replyToMessageId,
+        accountId: accountId ?? undefined,
+        duration: telegramData.videoNoteDuration,
+        length: telegramData.videoNoteLength,
+      });
+      return { channel: "telegram", ...result };
+    }
+
     const mediaUrls = payload.mediaUrls?.length
       ? payload.mediaUrls
       : payload.mediaUrl

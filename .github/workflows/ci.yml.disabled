@@ -1,0 +1,363 @@
+﻿name: CI
+
+on:
+  push:
+  pull_request:
+
+env:
+  PNPM_VERSION: "10.23.0"
+  NODE_VERSION: "22.x"
+
+jobs:
+  # ═══════════════════════════════════════════════════════════════
+  # Stage 1: Install & Cache (all other jobs depend on this)
+  # ═══════════════════════════════════════════════════════════════
+  install-check:
+    runs-on: ubuntu-latest
+    outputs:
+      cache-key: ${{ steps.cache-key.outputs.key }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Setup pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@${{ env.PNPM_VERSION }} --activate
+
+      - name: Generate cache key
+        id: cache-key
+        run: echo "key=pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}" >> "$GITHUB_OUTPUT"
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ steps.cache-key.outputs.key }}
+          restore-keys: |
+            pnpm-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+  # ═══════════════════════════════════════════════════════════════
+  # Stage 2: Fast checks (parallel, depends on install)
+  # ═══════════════════════════════════════════════════════════════
+  checks:
+    needs: install-check
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - task: lint
+            command: pnpm lint
+          - task: test
+            command: pnpm test
+          - task: build
+            command: pnpm build
+          - task: protocol
+            command: pnpm protocol:check
+          - task: format
+            command: pnpm format
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Setup pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@${{ env.PNPM_VERSION }} --activate
+
+      - name: Restore pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ needs.install-check.outputs.cache-key }}
+          restore-keys: |
+            pnpm-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Run ${{ matrix.task }}
+        run: ${{ matrix.command }}
+
+  # ═══════════════════════════════════════════════════════════════
+  # Stage 2b: Bun checks (parallel with node checks)
+  # ═══════════════════════════════════════════════════════════════
+  checks-bun:
+    needs: install-check
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - task: test
+            command: bunx vitest run
+          - task: build
+            command: bunx tsc -p tsconfig.json
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Setup pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@${{ env.PNPM_VERSION }} --activate
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Restore pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ needs.install-check.outputs.cache-key }}
+          restore-keys: |
+            pnpm-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Run ${{ matrix.task }} (bun)
+        run: ${{ matrix.command }}
+
+  # ═══════════════════════════════════════════════════════════════
+  # Stage 2c: Secrets scan (parallel, no deps needed)
+  # ═══════════════════════════════════════════════════════════════
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Detect secrets
+        run: |
+          pip install -q detect-secrets==1.5.0
+          detect-secrets scan --baseline .secrets.baseline
+
+  # ═══════════════════════════════════════════════════════════════
+  # Stage 3: Windows checks (after Ubuntu passes)
+  # ═══════════════════════════════════════════════════════════════
+  checks-windows:
+    needs: checks
+    runs-on: windows-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=4096
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - task: lint
+            command: pnpm lint
+          - task: test
+            command: pnpm test
+          - task: build
+            command: pnpm build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Setup pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@${{ env.PNPM_VERSION }} --activate
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-Windows-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-Windows-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Run ${{ matrix.task }}
+        run: ${{ matrix.command }}
+
+  # ═══════════════════════════════════════════════════════════════
+  # Stage 3b: macOS checks (PR only, after Ubuntu passes)
+  # ═══════════════════════════════════════════════════════════════
+  checks-macos:
+    if: github.event_name == 'pull_request'
+    needs: checks
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Setup pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@${{ env.PNPM_VERSION }} --activate
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-macOS-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-macOS-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Run tests
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: pnpm test
+
+  # ═══════════════════════════════════════════════════════════════
+  # Stage 3c: macOS App (PR only, parallel with checks-macos)
+  # ═══════════════════════════════════════════════════════════════
+  macos-app:
+    if: github.event_name == 'pull_request'
+    needs: checks
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - task: lint
+            command: |
+              swiftlint --config .swiftlint.yml
+              swiftformat --lint apps/macos/Sources --config .swiftformat
+          - task: build
+            command: swift build --package-path apps/macos --configuration release
+          - task: test
+            command: swift test --package-path apps/macos --parallel
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Select Xcode 26.1
+        run: |
+          sudo xcode-select -s /Applications/Xcode_26.1.app
+          xcodebuild -version
+
+      - name: Install tools
+        run: brew install xcodegen swiftlint swiftformat
+
+      - name: Run ${{ matrix.task }}
+        run: ${{ matrix.command }}
+
+  # ═══════════════════════════════════════════════════════════════
+  # Stage 3d: Android (after Ubuntu build passes)
+  # ═══════════════════════════════════════════════════════════════
+  android:
+    needs: checks
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - task: test
+            command: ./gradlew --no-daemon :app:testDebugUnitTest
+          - task: build
+            command: ./gradlew --no-daemon :app:assembleDebug
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ hashFiles('apps/android/**/*.gradle*', 'apps/android/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.11.1
+
+      - name: Install Android SDK packages
+        run: |
+          yes | sdkmanager --licenses >/dev/null
+          sdkmanager --install "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Run Android ${{ matrix.task }}
+        working-directory: apps/android
+        run: ${{ matrix.command }}
+
+  # ═══════════════════════════════════════════════════════════════
+  # Stage 4: iOS (disabled for now)
+  # ═══════════════════════════════════════════════════════════════
+  ios:
+    if: false
+    needs: macos-app
+    runs-on: macos-latest
+    steps:
+      - name: Placeholder
+        run: echo "iOS CI disabled"

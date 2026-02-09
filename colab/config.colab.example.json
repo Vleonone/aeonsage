@@ -1,0 +1,25 @@
+{
+  "models": {
+    "providers": {
+      "ollama": {
+        "apiKey": "ollama",
+        "baseUrl": "http://127.0.0.1:11434/v1"
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "ollama/llama3.1:8b"
+      }
+    }
+  },
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "token": "your-colab-token-here"
+    },
+    "bind": "0.0.0.0",
+    "port": 18789
+  }
+}

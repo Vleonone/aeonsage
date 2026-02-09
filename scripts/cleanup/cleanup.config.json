@@ -1,0 +1,52 @@
+{
+    "version": "1.0.0",
+    "description": "AeonSage Doc Cleanup Configuration",
+    "localDir": ".local",
+    "dryRunDefault": true,
+    "rules": [
+        {
+            "id": "audit-dirs",
+            "pattern": "*-audit/",
+            "action": "move",
+            "target": ".local/archive/",
+            "description": "Move audit directories to local archive"
+        },
+        {
+            "id": "backups",
+            "pattern": [
+                "_backups/",
+                "backups/"
+            ],
+            "action": "move",
+            "target": ".local/backups/",
+            "description": "Consolidate backup directories"
+        },
+        {
+            "id": "temp-json",
+            "pattern": "temp_*.json",
+            "action": "move",
+            "target": ".local/temp/",
+            "description": "Move temporary JSON files"
+        },
+        {
+            "id": "lint-errors",
+            "pattern": "lint_errors.txt",
+            "action": "move",
+            "target": ".local/temp/",
+            "description": "Move lint error logs"
+        }
+    ],
+    "protectedPaths": [
+        "src/",
+        "dist/",
+        "docs/",
+        "assets/",
+        "skills/",
+        "scripts/",
+        "packages/",
+        ".github/",
+        "apps/",
+        "ui/",
+        "extensions/"
+    ]
+}

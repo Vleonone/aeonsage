@@ -1,0 +1,100 @@
+name: Full QA Pipeline
+
+on:
+  push:
+    branches: [main, develop, 'feature/**']
+    paths:
+      - 'src/**'
+      - 'ui/**'
+      - 'test/**'
+      - 'package.json'
+      - 'tsconfig.json'
+  pull_request:
+    branches: [main, develop]
+
+concurrency:
+  group: qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+
+      - name: TypeScript Lint (oxlint)
+        run: pnpm lint
+
+      - name: CSS Lint (Stylelint)
+        run: pnpm lint:css 2>&1 || true
+
+      - name: Brand Audit
+        run: pnpm brand:audit:strict
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+
+      - name: TypeScript Compile
+        run: pnpm build
+
+  test:
+    name: Test & Coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+
+      - name: Run Tests with Coverage
+        run: pnpm test:coverage
+
+      - name: Upload Coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 7
+
+  analysis:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+
+      - name: Dead Code Detection (knip)
+        run: pnpm dead-code 2>&1 || true
+
+      - name: Circular Dependencies
+        run: pnpm circular 2>&1 || true
