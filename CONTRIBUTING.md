@@ -1,29 +1,38 @@
 # Contributing to AeonSage
 
-Thanks for taking the time to contribute! We're happy you're here.
-
-This guide will help you get started with the codebase and our development workflow.
+Thanks for your interest in contributing! This guide will help you get started.
 
 ---
 
 ## Project Structure
 
-AeonSage is a modular Node.js application. Here's a quick overview:
+AeonSage is a modular monorepo built with **pnpm workspaces**.
 
-*   `src/kernel/`: Core logic and state management.
-*   `src/router/`: Handles LLM routing and decision making.
-*   `src/skills/`: Individual capability modules (e.g., file system, web search).
-*   `ui/`: The dashboard frontend (React + Vite).
+```
+AeonSage/
+├── src/
+│   ├── kernel/          # Core runtime & state management
+│   ├── router/          # LLM routing & Cognitive Router logic
+│   ├── skills/          # Individual capability modules
+│   ├── gateway/         # HTTP + WebSocket server (Hono)
+│   └── channels/        # Bridge adapters (Telegram, Discord, etc.)
+├── ui/                  # Web dashboard (Lit + Vite)
+├── packages/            # Shared libraries
+├── extensions/          # Channel extensions
+├── docs/                # Documentation
+└── assets/              # Brand assets & icons
+```
 
 ---
 
-## Setup Guide
+## Prerequisites
 
-### prerequisites
-*   **Node.js**: v22.0.0+
-*   **Package Manager**: `pnpm` (recommended) or `npm`.
+*   **Node.js** v22.0.0+
+*   **pnpm** (recommended) — `npm install -g pnpm`
 
-### Running Locally
+---
+
+## Setup
 
 1.  **Clone the repo**:
     ```bash
@@ -33,39 +42,68 @@ AeonSage is a modular Node.js application. Here's a quick overview:
 
 2.  **Install dependencies**:
     ```bash
-    npm install
+    pnpm install
     ```
 
-3.  **Start development server**:
+3.  **Start the development server**:
     ```bash
-    npm run dev
+    pnpm dev
     ```
 
 ---
 
 ## How to Contribute
 
-### 1. Reporting Bugs
-Found a bug? Please open an issue on GitHub.
-Include:
-*   Steps to reproduce.
-*   Expected vs. actual behavior.
-*   Screenshots or logs if available.
+### Reporting Bugs
 
-### 2. Pull Requests (PRs)
-We welcome PRs for bug fixes and new features.
+Found a bug? Please [open an issue](https://github.com/velonone/Aeonsage/issues) with:
+
+*   Steps to reproduce
+*   Expected vs. actual behavior
+*   Node.js version and OS
+*   Screenshots or logs if available
+
+### Pull Requests
+
+We welcome PRs for bug fixes, new features, and documentation improvements.
 
 1.  **Fork** the repository.
-2.  Create a branch: `git checkout -b feature/my-cool-feature`.
+2.  Create a branch: `git checkout -b feature/my-feature`
 3.  Make your changes.
 4.  **Test** your changes locally.
-5.  Commit with a clear message: `feat: add telegram support`.
-    *   *Note: We use DCO sign-off (`git commit -s`), so please sign your commits.*
-6.  Push and open a Pull Request.
+5.  Commit with a clear message following [Conventional Commits](https://www.conventionalcommits.org/):
+    ```
+    feat: add telegram bridge support
+    fix: resolve websocket reconnection issue
+    docs: update setup guide
+    ```
+6.  Push and open a Pull Request against `main`.
 
-### 3. AI Usage
-You are welcome to use AI tools (like Copilot or ChatGPT) to write code.
-Just make sure you **review and test** the code before submitting. You are responsible for the code you ship.
+### Commit Signing
+
+We use DCO sign-off. Please sign your commits:
+
+```bash
+git commit -s -m "feat: your feature description"
+```
+
+### Code Style
+
+*   TypeScript strict mode
+*   ESM imports (`import` / `export`, no `require`)
+*   Prefer small, focused modules
+
+---
+
+## Contributing to Opensage (Cognitive Router)
+
+The Cognitive Router is independently open-sourced at **[velonone/Opensage](https://github.com/velonone/Opensage)**. If you want to improve the routing logic, model orchestration, or add new providers, please contribute there directly. The codebase is lightweight and designed to be integrated into any environment.
+
+---
+
+## AI Usage
+
+You are welcome to use AI tools to assist with writing code. Please **review and test** thoroughly before submitting. You are responsible for the code you ship.
 
 ---
 
@@ -73,5 +111,6 @@ Just make sure you **review and test** the code before submitting. You are respo
 
 *   **Documentation**: [docs.aeonsage.org](https://docs.aeonsage.org)
 *   **Discussions**: [GitHub Discussions](https://github.com/velonone/Aeonsage/discussions)
+*   **Issues**: [GitHub Issues](https://github.com/velonone/Aeonsage/issues)
 
 Happy coding!
